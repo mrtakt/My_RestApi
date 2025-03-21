@@ -1,0 +1,410 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>YK Project | Rest Api</title>
+  <meta name="description" content="Free Rest Api." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="images/icon.png" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
+  <link href="plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+  <link href="css/style.bundle.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-disabled">
+  <div class="d-flex flex-column flex-root">
+    <div class="page d-flex flex-row flex-column-fluid">
+      <div id="kt_aside" class="aside aside-extended bg-white" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="auto" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
+        <div class="aside-primary d-flex flex-column align-items-lg-center flex-row-auto">
+          <div class="aside-logo d-none d-lg-flex flex-column align-items-center flex-column-auto pt-10" id="kt_aside_logo">
+            <a href="#">
+              <img alt="Logo" src="images/logo.png" class="h-55px" />
+            </a>
+          </div>
+          <div class="aside-nav d-flex flex-column flex-lg-center flex-column-fluid w-100 pt-5 pt-lg-0" id="kt_aside_nav">
+            <div id="kt_aside_menu" class="menu menu-column menu-title-gray-600 menu-icon-gray-400 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold fs-5" data-kt-menu="true">
+              <div class="menu-item py-2">
+                <a class="menu-link active menu-center" href="#" title="Dashboard" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                  <span class="menu-icon me-0">
+                    <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-heart-fill" viewBox="0 0 16 16">
+                        <path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.707L8 2.207 1.354 8.853a.5.5 0 1 1-.708-.707L7.293 1.5Z" />
+                        <path d="m14 9.293-6-6-6 6V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9.293Zm-6-.811c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.691 0-5.018Z" />
+                      </svg>
+                    </span>
+                  </span>
+                </a>
+              </div>
+              <!--ai-->
+              <div class="menu-item py-2">
+                <a class="menu-link menu-center" href="/ai" title="Ai" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                  <span class="menu-icon me-0">
+                    <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-robot" viewBox="0 0 16 16">
+                        <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.58 26.58 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.933.933 0 0 1-.765.935c-.845.147-2.34.346-4.235.346-1.895 0-3.39-.2-4.235-.346A.933.933 0 0 1 3 9.219V8.062Zm4.542-.827a.25.25 0 0 0-.217.068l-.92.9a24.767 24.767 0 0 1-1.871-.183.25.25 0 0 0-.068.495c.55.076 1.232.149 2.02.193a.25.25 0 0 0 .189-.071l.754-.736.847 1.71a.25.25 0 0 0 .404.062l.932-.97a25.286 25.286 0 0 0 1.922-.188.25.25 0 0 0-.068-.495c-.538.074-1.207.145-1.98.189a.25.25 0 0 0-.166.076l-.754.785-.842-1.7a.25.25 0 0 0-.182-.135Z" />
+                        <path d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2V1.866ZM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5Z" />
+                      </svg>
+                    </span>
+                  </span>
+                </a>
+              </div>
+              <!--Downloader-->
+              <div class="menu-item py-2">
+                <a class="menu-link menu-center" href="/downloader" title="Downloader" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                  <span class="menu-icon me-0">
+                    <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                      </svg>
+                    </span>
+                  </span>
+                </a>
+              </div>
+              <!--Text Pro-->
+              <div class="menu-item py-2">
+                <a class="menu-link menu-center" href="/textpro" title="Text Pro" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                  <span class="menu-icon me-0">
+                    <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">
+                        <path d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z" />
+                      </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                  </span>
+                </a>
+              </div>
+              <!--Photooxy -->
+              <div class="menu-item py-2">
+                <a class="menu-link menu-center" href="/photooxy" title="PhotoOxy" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                  <span class="menu-icon me-0">
+                    <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image-fill" viewBox="0 0 16 16">
+                        <path d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2V3zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z" />
+                      </svg>
+                    </span>
+                  </span>
+                </a>
+              </div>
+              <!-- Search-->
+              <div class="menu-item py-2">
+                <a class="menu-link menu-center" href="/search" title="Search" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                  <span class="menu-icon me-0">
+                    <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search-heart-fill" viewBox="0 0 16 16">
+                        <path d="M6.5 13a6.474 6.474 0 0 0 3.845-1.258h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.008 1.008 0 0 0-.115-.1A6.471 6.471 0 0 0 13 6.5 6.502 6.502 0 0 0 6.5 0a6.5 6.5 0 1 0 0 13Zm0-8.518c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z" />
+                      </svg>
+                    </span>
+                  </span>
+                </a>
+              </div>
+              <!-- Random Pic-->
+              <div class="menu-item py-2">
+                <a class="menu-link menu-center" href="/randompic" title="Random Gambar" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                  <span class="menu-icon me-0">
+                    <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shuffle" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z" />
+                        <path d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z" />
+                      </svg>
+                    </span>
+                  </span>
+                </a>
+              </div>
+              <!-- Game-->
+              <div class="menu-item py-2">
+                <a class="menu-link menu-center" href="/game" title="Game" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                  <span class="menu-icon me-0">
+                    <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
+                        <path d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2z" />
+                        <path d="M0 9.665v1.717a1 1 0 0 0 .553.894l6.553 3.277a2 2 0 0 0 1.788 0l6.553-3.277a1 1 0 0 0 .553-.894V9.665c0-.1-.06-.19-.152-.23L9.5 6.715v.993l5.227 2.178a.125.125 0 0 1 .001.23l-5.94 2.546a2 2 0 0 1-1.576 0l-5.94-2.546a.125.125 0 0 1 .001-.23L6.5 7.708l-.013-.988L.152 9.435a.25.25 0 0 0-.152.23z" />
+                      </svg>
+                    </span>
+                  </span>
+                </a>
+              </div>
+              <!-- Text Audio-->
+              <div class="menu-item py-2">
+                <a class="menu-link menu-center" href="/textaudio" title="Text Audio" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                  <span class="menu-icon me-0">
+                    <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note" viewBox="0 0 16 16">
+                        <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z" />
+                        <path fill-rule="evenodd" d="M9 3v10H8V3h1z" />
+                        <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z" />
+                      </svg>
+                    </span>
+                  </span>
+                </a>
+              </div>
+              <!-- Shortlink-->
+              <div class="menu-item py-2">
+                <a class="menu-link menu-center" href="/shortlink" title="ShortLink" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                  <span class="menu-icon me-0">
+                    <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link" viewBox="0 0 16 16">
+                        <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z" />
+                        <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z" />
+                      </svg>
+                    </span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Social-->
+          <div class="aside-footer d-flex flex-column align-items-center flex-column-auto" id="kt_aside_footer">
+            <div class="mb-7">
+              <button type="button" class="btn btm-sm btn-icon btn-color-gray-400 btn-active-color-primary btn-active-light" data-kt-menu-trigger="click" data-kt-menu-overflow="true" data-kt-menu-placement="top-start" data-kt-menu-flip="top-end" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-dismiss="click" title="Social">
+                <span class="svg-icon svg-icon-2 svg-icon-lg-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <rect fill="#000000" opacity="0.3" x="4" y="4" width="4" height="4" rx="2" />
+                    <rect fill="#000000" x="4" y="10" width="4" height="4" rx="2" />
+                    <rect fill="#000000" x="10" y="4" width="4" height="4" rx="2" />
+                    <rect fill="#000000" x="10" y="10" width="4" height="4" rx="2" />
+                    <rect fill="#000000" x="16" y="4" width="4" height="4" rx="2" />
+                    <rect fill="#000000" x="16" y="10" width="4" height="4" rx="2" />
+                    <rect fill="#000000" x="4" y="16" width="4" height="4" rx="2" />
+                    <rect fill="#000000" x="10" y="16" width="4" height="4" rx="2" />
+                    <rect fill="#000000" x="16" y="16" width="4" height="4" rx="2" />
+                  </svg>
+                </span>
+              </button>
+              <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold w-200px" data-kt-menu="true">
+                <!--begin::Menu item-->
+                <div class="menu-item px-3">
+                  <div class="menu-content fs-6 text-dark fw-bolder px-3 py-4">
+                    Social
+                  </div>
+                </div>
+                <div class="separator mb-3 opacity-75"></div>
+                <div class="menu-item px-3">
+                  <a href="https://github.com/mrtakt" class="menu-link px-3" target="_blank">Github</a>
+                </div>
+                <div class="menu-item px-3">
+                  <a href="https://facebook.com/yukisubagja" class="menu-link px-3" target="_blank">Facebook</a>
+                </div>
+                <div class="menu-item px-3">
+                  <a href="https://twitter.com/extrasabar" class="menu-link px-3" target="_blank">Twitter</a>
+                </div>
+                <div class="menu-item px-3">
+                  <a href="https://Instagram.com/yuki21_" class="menu-link px-3" target="_blank">Instagram</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+        <div id="kt_header" class="header" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+          <div class="container-fluid d-flex align-items-stretch justify-content-between" id="kt_header_container">
+            <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-2 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
+              <h1 class="text-dark fw-bolder my-1 fs-2">
+                YK Project
+                <small class="text-muted fs-6 fw-normal ms-1"></small>
+              </h1>
+              <ul class="breadcrumb fw-bold fs-base my-1">
+                <li class="breadcrumb-item text-muted">
+                  <a href="#" class="text-muted">Rest Api</a>
+                </li>
+                <li class="breadcrumb-item text-dark">Dashboard</li>
+              </ul>
+            </div>
+            <div class="d-flex d-lg-none align-items-center ms-n2 me-2">
+              <!--begin::Aside mobile toggle-->
+              <div class="btn btn-icon btn-active-icon-primary" id="kt_aside_toggle">
+                <!--begin::Svg Icon | path: icons/duotone/Text/Menu.svg-->
+                <span class="svg-icon svg-icon-2x">
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <rect x="0" y="0" width="24" height="24" />
+                      <rect fill="#000000" x="4" y="5" width="16" height="3" rx="1.5" />
+                      <path d="M5.5,15 L18.5,15 C19.3284271,15 20,15.6715729 20,16.5 C20,17.3284271 19.3284271,18 18.5,18 L5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 Z M5.5,10 L18.5,10 C19.3284271,10 20,10.6715729 20,11.5 C20,12.3284271 19.3284271,13 18.5,13 L5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 Z" fill="#000000" opacity="0.3" />
+                    </g>
+                  </svg>
+                </span>
+              </div>
+              <a href="/dashboard" class="d-flex align-items-center">
+                <img alt="Logo" src="images/logov.png" class="max-h-40px" />
+              </a>
+            </div>
+            <div class="d-flex align-items-stretch flex-shrink-0">
+              <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
+                <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end" data-kt-menu-flip="bottom">
+                  <img src="images/kobeni.png" alt="metronic" />
+                </div>
+                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
+                  <div class="menu-item px-3">
+                    <div class="menu-content d-flex align-items-center px-3">
+                      <!--begin::Avatar-->
+                      <div class="symbol symbol-50px me-5">
+                        <img alt="Logo" src="images/kobeni.png" />
+                      </div>
+                      <div class="d-flex flex-column">
+                        <% if(!verified){ %>
+                        <span class="badge badge-light-danger fw-bolder fs-8 px-2 py-1 ms-2">Belum Verifikasi</span>
+                        <% }else{ %>
+                        <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Terverifikasi</span>
+                        <% } %>
+                        <div class="fw-bolder d-flex align-items-center fs-5">
+                          <%= username %>
+                          <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"></span>
+                        </div>
+                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7"><%= email %></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="separator my-2"></div>
+                  <div class="menu-item px-5">
+                    <a href="/profile" class="menu-link px-5">Profile</a>
+                  </div>
+                  <div class="menu-item px-5">
+                    <a href="/logout" class="menu-link px-5">Sign Out</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+          <div class="container" id="kt_content_container">
+            <div class="row g-5 gx-xxl-8 mb-xxl-3">
+              <div class="col-xxl-8">
+                <div class="card card-xxl-stretch mb-5 mb-xxl-8">
+                  <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                      <span class="card-label fw-boldest fs-3 text-dark">Welcome <%= username %></span>
+                      <span class="text-gray-400 mt-2 fw-bold fs-6">Gunakan Rest Api Dengan Baik</span>
+                    </h3>
+                    <div class="card-toolbar">
+                      <!--begin::Nav-->
+                      <ul class="nav nav-pills">
+                        <li class="nav-item me-1">
+                          <a class="btn btn-color-black-400" id="JamSekarang"></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="tab-content pt-10">
+                      <div class="tab-pane fade active show" id="kt_chart_widget_1_tab_pane_1">
+                        <!--begin::Row-->
+                        <div class="row p-0 px-9">
+                          <div class="col">
+                            <!--begin::Stat-->
+                            <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
+                              <span class="fs-4 fw-bold text-gray-400 d-block">Request Hari Ini</span>
+                              <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true"><%= RequestToday %></span>
+                            </div>
+                            <!--end::Stat-->
+                          </div>
+                          <!--end::Col-->
+                          <!--begin::Col-->
+                          <div class="col">
+                            <!--begin::Stat-->
+                            <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
+                              <span class="fs-4 fw-bold text-gray-400 d-block">Limit Apikey</span>
+                              <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true"><%= limit %></span>
+                            </div>
+                            <!--end::Stat-->
+                          </div>
+                          <!--end::Col-->
+                          <!--begin::Col-->
+                          <div class="col">
+                            <!--begin::Stat-->
+                            <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
+                              <span class="fs-4 fw-bold text-gray-400 d-block">Apikey</span>
+                              <span class="fs-2x fw-boldest text-gray-800"><%= apikey %></span>
+                            </div>
+                          </div>
+
+                          <div class="py-10">
+                            <div class="py-5">
+                              <span class="text-gray-400 mt-2 fw-bold fs-6">TOTAL PENGUNJUNG</span>
+                              <div class="rounded border p-10" align="center">
+                                <img width="500" alt="Cute count" src="https://moe.isekai.eu.org/get/@ykpro?theme=rule34" />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="py-5">
+                              <span class="text-gray-400 mt-2 fw-bold fs-6">Berbagi Kebaikan</span>
+                              <div class="rounded border p-10">
+                                <a href="https://www.canva.com/brand/join?token=JQA4tcnbexIpsfubkjACUg&referrer=team-invite" class="btn btn-outline btn-outline-dashed btn-outline-info btn-active-light-info me-2 mb-2">Canva Invite</a>
+                                <a href="#" class="btn btn-outline btn-outline-dashed btn-outline-success btn-active-light-success me-2 mb-2">Coming Soon</a>
+                                <a href="#" class="btn btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger me-2 mb-2">Coming Soon</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% if(!verified){ %>
+                <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
+                  <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                      <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
+                      <rect fill="#000000" x="11" y="7" width="2" height="8" rx="1" />
+                      <rect fill="#000000" x="11" y="16" width="2" height="2" rx="1" />
+                    </svg>
+                  </span>
+                  <div class="d-flex flex-stack flex-grow-1">
+                    <!--begin::Content-->
+                    <div class="fw-bold">
+                      <h4 class="text-gray-800 fw-bolder">Perhatian!</h4>
+                      <div class="fs-6 text-gray-600">
+                        Email Mu Belum Di Verifikasi
+                        <a class="fw-bolder" href="/send-verification-email">Kirim Ulang Email Verifikasi</a>
+                      </div>
+                      <% } %> <% if( error_messages !="" ){ %>
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><%= error_messages %></strong>
+                      </div>
+                      <% } %> <% if( success_messages !="" ){ %>
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong> Berhasil ! <%= success_messages %></strong>
+                      </div>
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--begin::Javascript-->
+  <script>
+    function cb(response) {
+      document.getElementById("visitor").innerText = response.value;
+    }
+  </script>
+  <!--begin::Global Javascript Bundle(used by all pages)-->
+  <script src="plugins/plugins.bundle.js"></script>
+  <script src="js/scripts.bundle.js"></script>
+  <script>
+    window.setTimeout("waktu()", 1000);
+
+    function waktu() {
+      var d = new Date();
+      const jam = d.getHours();
+      const menit = d.getMinutes();
+      const detik = d.getSeconds();
+      setTimeout("waktu()", 1000);
+      document.getElementById("JamSekarang").innerHTML = jam + ":" + menit
+    }
+  </script>
+  <!--end::Global Javascript Bundle-->
+  <!--begin::Page Custom Javascript(used by this page)-->
+  <script src="js/custom/widgets.js"></script>
+  <!--end::Page Custom Javascript-->
+  <!--end::Javascript-->
+</body>
+
+</html>
