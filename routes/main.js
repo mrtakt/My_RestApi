@@ -17,7 +17,7 @@ function checkRole(role) {
       if (req.isAuthenticated() && req.user.role === role) {
           return next(); // Jika pengguna terautentikasi dan memiliki peran yang sesuai, lanjutkan ke rute berikutnya
       }
-      res.status(403).send('Access denied'); // Jika tidak, kirimkan pesan akses ditolak
+        res.redirect('/dashboard');
   };
 }
 
@@ -47,7 +47,7 @@ router.get('/', (req, res) => {
 router.get('/admin', checkRole('admin'), async (req, res) => {
   let getinfo =  await getApikey(req.user.id)
   let { apikey, username, checklimit, isVerified , RequestToday , email,role } = getinfo
-    res.render("admin", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email ,role: role});
+    res.render("admin/admin", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email ,role: role});
     
 });
 

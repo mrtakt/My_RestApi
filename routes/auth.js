@@ -19,14 +19,6 @@ const Recaptcha = require('express-recaptcha').RecaptchaV2;
 const recaptcha = new Recaptcha(recaptcha_key_1, recaptcha_key_2);
 
 //_______________________ ┏ Function ┓ _______________________\\
-function checkRole(role) {
-    return function(req, res, next) {
-        if (req.isAuthenticated() && req.user.role === role) {
-            return next(); // Jika pengguna terautentikasi dan memiliki peran yang sesuai, lanjutkan ke rute berikutnya
-        }
-        res.status(403).send('Access denied'); // Jika tidak, kirimkan pesan akses ditolak
-    };
-}
 function checkAuth(req, res, next) {
     if (req.isAuthenticated()) {
         res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, post-check=0, pre-check=0');
