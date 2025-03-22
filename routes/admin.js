@@ -31,7 +31,7 @@ let getinfo =  await getApikey(req.user.id)
 let { apikey, username, checklimit, isVerified , RequestToday , email,role } = getinfo
 res.render("admin/admin", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email ,role: role});
 });
-router.get('/admin/userdata', checkAuth, async (req, res) => {
+router.get('/admin/userdata', checkRole('admin'), async (req, res) => {
     let getinfo =  await getApikey(req.user.id)
     let { apikey, username, checklimit, isVerified , RequestToday , email,role } = getinfo
     res.render("admin/datauser", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email ,role: role});
