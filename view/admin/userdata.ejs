@@ -32,7 +32,7 @@
               class="menu menu-column menu-title-gray-600 menu-icon-gray-400 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold fs-5"
               data-kt-menu="true">
               <div class="menu-item py-2">
-                <a class="menu-link active menu-center" href="/admin" title="Dashboard" data-bs-toggle="tooltip"
+                <a class="menu-link menu-center" href="/admin" title="Dashboard" data-bs-toggle="tooltip"
                   data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                   <span class="menu-icon me-0">
                     <!--begin::Svg Icon | path: icons/duotone/Home/Home2.svg-->
@@ -48,7 +48,7 @@
                 </a>
               </div>
               <div class="menu-item py-2">
-                <a class="menu-link menu-center" href="/ai" title="Data" data-bs-toggle="tooltip"
+                <a class="menu-link active menu-center" href="/apidata" title="Data" data-bs-toggle="tooltip"
                   data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                   <span class="menu-icon me-0">
                     <span class="svg-icon svg-icon-1">
@@ -68,7 +68,7 @@
                 </a>
               </div>
               <div class="menu-item py-2">
-                <a class="menu-link menu-center" href="/userdata" title="Userdata" data-bs-toggle="tooltip"
+                <a class="menu-link menu-center" href="/ai" title="Data" data-bs-toggle="tooltip"
                   data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                   <span class="menu-icon me-0">
                     <span class="svg-icon svg-icon-1">
@@ -86,7 +86,7 @@
                 </a>
               </div>
               <div class="menu-item py-2">
-                <a class="menu-link menu-center" href="/userdata" title="UserData" data-bs-toggle="tooltip"
+                <a class="menu-link menu-center" href="/userdata" title="Userdata" data-bs-toggle="tooltip"
                   data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                   <span class="menu-icon me-0">
                     <span class="svg-icon svg-icon-1">
@@ -232,7 +232,7 @@
                     <a href="/profile" class="menu-link px-5">Profile</a>
                   </div>
                   <div class="menu-item px-5">
-                    <a data-bs-toggle="modal" data-bs-target="#logout" class="menu-link px-5">Sign Out</a>
+                    <a href="/logout" class="menu-link px-5">Sign Out</a>
                   </div>
                 </div>
               </div>
@@ -258,77 +258,36 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="card-body p-0">
-                    <div class="tab-content pt-10">
-                      <div class="tab-pane fade active show" id="kt_chart_widget_1_tab_pane_1">
-                        <!--begin::Row-->
-                        <div class="row p-0 px-9">
-                          <div class="col">
-                            <!--begin::Stat-->
-                            <div
-                              class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
-                              <span class="fs-4 fw-bold text-gray-400 d-block">Request Hari Ini</span>
-                              <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true">
-                                <%= RequestToday %>
-                              </span>
-                            </div>
-                            <!--end::Stat-->
-                          </div>
-                          <!--end::Col-->
-                          <!--begin::Col-->
-                          <div class="col">
-                            <!--begin::Stat-->
-                            <div
-                              class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
-                              <span class="fs-4 fw-bold text-gray-400 d-block">Limit Apikey</span>
-                              <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true">
-                                <%= limit %>
-                              </span>
-                            </div>
-                            <!--end::Stat-->
-                          </div>
-                          <!--end::Col-->
-                          <!--begin::Col-->
-                          <div class="col">
-                            <!--begin::Stat-->
-                            <div
-                              class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
-                              <span class="fs-4 fw-bold text-gray-400 d-block">Apikey</span>
-                              <span class="fs-2x fw-boldest text-gray-800">
-                                <%= apikey %>
-                              </span>
-                            </div>
-                          </div>
-
-                          <div class="py-10">
-                            <div class="py-5">
-                              <span class="text-gray-400 mt-2 fw-bold fs-6">TOTAL PENGUNJUNG</span>
-                              <div class="rounded border p-10" align="center">
-                                <img width="500" alt="Cute count"
-                                  src="https://count.getloli.com/get/@MrTakt?theme=rule34" />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col">
-                            <div class="py-5">
-                              <span class="text-gray-400 mt-2 fw-bold fs-6">Berbagi Kebaikan</span>
-                              <div class="rounded border p-10">
-                                <a href="https://www.canva.com/brand/join?token=JQA4tcnbexIpsfubkjACUg&referrer=team-invite"
-                                  class="btn btn-outline btn-outline-dashed btn-outline-info btn-active-light-info me-2 mb-2">Canva
-                                  Invite</a>
-                                <a href="#"
-                                  class="btn btn-outline btn-outline-dashed btn-outline-success btn-active-light-success me-2 mb-2">Coming
-                                  Soon</a>
-                                <a href="#"
-                                  class="btn btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger me-2 mb-2">Coming
-                                  Soon</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <table class="table table-hover table-rounded table-striped border gy-7 gs-7">
+                    <thead>
+                      <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Apikey</th>
+                        <th>Verifikasi</th>
+                        <th>Limit</th>
+                        <th>Role</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% users.forEach(user => { %>
+                        <tr>
+                            <td><%= user.username %></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.apikey %></td>
+                            <td><%= user.isVerified %></td>
+                            <td><%= user.limit %></td>
+                            <td><%= user.role %></td>
+                            <td>
+                              <a href="/users/edit/<%= user._id %>" class="btn btn-warning">Edit</a>
+                              <form action="/users/delete/<%= user._id %>" method="POST" style="display:inline;">
+                                  <button type="submit" class="btn btn-danger">Delete</button>
+                              </form>
+                          </td>
+                      </tr>
+                  <% }) %>
+                    </tbody>
+                  </table>
                 </div>
                 <% if(!verified){ %>
                   <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
@@ -340,54 +299,6 @@
                         <rect fill="#000000" x="11" y="16" width="2" height="2" rx="1" />
                       </svg>
                     </span>
-                    <div class="d-flex flex-stack flex-grow-1">
-                      <!--begin::Content-->
-                      <div class="fw-bold">
-                        <h4 class="text-gray-800 fw-bolder">Perhatian!</h4>
-                        <div class="fs-6 text-gray-600">
-                          Email Mu Belum Di Verifikasi
-                          <a class="fw-bolder" href="/send-verification-email">Kirim Ulang Email Verifikasi</a>
-                        </div>
-                        <% } %>
-                          <% if( error_messages !="" ){ %>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                              <strong>
-                                <%= error_messages %>
-                              </strong>
-                            </div>
-                            <% } %>
-                              <% if( success_messages !="" ){ %>
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                  <strong> Berhasil ! <%= success_messages %></strong>
-                                </div>
-                                <% } %>
-                      </div>
-                    </div>
-                    <div class="modal fade" tabindex="-1" id="logout">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">Keluar</h5>
-
-                            <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
-                              aria-label="Close">
-                              <span class="svg-icon svg-icon-2x"></span>
-                            </div>
-                            <!--end::Close-->
-                          </div>
-
-                          <div class="modal-body">
-                            <p>Yakin Keluar Dari Akun Ini?</p>
-                          </div>
-
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                            <a class="btn btn-danger" href="/logout">Keluar</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
               </div>
             </div>

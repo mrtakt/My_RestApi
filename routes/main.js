@@ -7,19 +7,12 @@ const router = express.Router();
 const passport = require('passport');
 require('../controller/passportLocal')(passport);
 const authRoutes = require('./auth');
+const adminRoutes = require('./admin');
 const apiRoutes = require('./api')
 const dataweb = require('../model/DataWeb');
 const User = require('../model/user');
 
 //_______________________ ┏ Function ┓ _______________________\\
-function checkRole(role) {
-  return function(req, res, next) {
-      if (req.isAuthenticated() && req.user.role === role) {
-          return next(); // Jika pengguna terautentikasi dan memiliki peran yang sesuai, lanjutkan ke rute berikutnya
-      }
-        res.redirect('/dashboard');
-  };
-}
 
 function checkAuth(req, res, next) {
     if (req.isAuthenticated()) {
@@ -42,13 +35,6 @@ async function getApikey(id) {
 
 router.get('/', (req, res) => {
         res.render("home");
-});
-
-router.get('/admin', checkRole('admin'), async (req, res) => {
-  let getinfo =  await getApikey(req.user.id)
-  let { apikey, username, checklimit, isVerified , RequestToday , email,role } = getinfo
-    res.render("admin/admin", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email ,role: role});
-    
 });
 
 router.get('/dashboard',  checkAuth, async (req, res) => {
@@ -135,6 +121,15 @@ router.get('/nsfw',  checkAuth, async (req, res) => {
     
 });
 //_______________________ ┏ Router Docs Api End ┓ _______________________\\
+
+//_______________________ ┏ Router Docs Admin ┓ _______________________\\
+router.get('/userdata',  checkAuth, async (req, res) => {
+  let getinfo =  await getApikey(req.user.id)
+  let { apikey, username, checklimit, isVerified , RequestToday , email } = getinfo
+    res.render("admin/userdata", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email });
+    
+});
+//_______________________ ┏ Router Docs Admin End┓ _______________________\\
 router.get("/logout", (req, res) => {
     req.logout(req.user, err => {
       if(err) return next(err);
@@ -146,6 +141,7 @@ router.get("/logout", (req, res) => {
 
 router.use(authRoutes);
 router.use(apiRoutes);
+router.use(adminRoutes);
 module.exports = router;
 
 
