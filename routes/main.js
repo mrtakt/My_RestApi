@@ -122,14 +122,6 @@ router.get('/nsfw',  checkAuth, async (req, res) => {
 });
 //_______________________ ┏ Router Docs Api End ┓ _______________________\\
 
-//_______________________ ┏ Router Docs Admin ┓ _______________________\\
-router.get('/userdata',  checkAuth, async (req, res) => {
-  let getinfo =  await getApikey(req.user.id)
-  let { apikey, username, checklimit, isVerified , RequestToday , email } = getinfo
-    res.render("admin/userdata", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email });
-    
-});
-//_______________________ ┏ Router Docs Admin End┓ _______________________\\
 router.get("/logout", (req, res) => {
     req.logout(req.user, err => {
       if(err) return next(err);

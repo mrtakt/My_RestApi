@@ -31,14 +31,14 @@ let getinfo =  await getApikey(req.user.id)
 let { apikey, username, checklimit, isVerified , RequestToday , email,role } = getinfo
 res.render("admin/admin", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email ,role: role});
 });
-router.get('/userdata', checkRole('admin'), async (req, res) => {
+router.get('/admin/userdata', checkAuth, async (req, res) => {
     let getinfo =  await getApikey(req.user.id)
     let { apikey, username, checklimit, isVerified , RequestToday , email,role } = getinfo
-    res.render("admin/userdata", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email ,role: role});
+    res.render("admin/datauser", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email ,role: role});
     });
 //_______________________ ┏ Router CRUD ┓ _______________________\\
 // Rute untuk menampilkan data
-router.get('/users', async (req, res) => {
+router.get('/admin/users', async (req, res) => {
     try {
         const users = await User.find(); // Mengambil semua pengguna dari database
         res.render('users', { users }); // Mengirim data pengguna ke template EJS
@@ -47,14 +47,14 @@ router.get('/users', async (req, res) => {
     }
 });
 // Rute untuk menampilkan form tambah pengguna
-router.get('/users/new', (req, res) => {
+router.get('/admin/users/new', (req, res) => {
     res.render('newUser ');
 });
 
 // Rute untuk menyimpan pengguna baru
-router.post('/users', async (req, res) => {
-    const { name, email, age } = req.body;
-    const newUser  = new User({ name, email, age });
+router.post('/admin/users', async (req, res) => {
+    const { username, email, apikey,limitApikey,role } = req.body;
+    const newUser  = new User({ username, email, apikey,limitApikey,role });
     try {
         await newUser .save();
         res.redirect('/users'); // Arahkan kembali ke daftar pengguna
@@ -64,7 +64,7 @@ router.post('/users', async (req, res) => {
 });
 
 // Rute untuk menampilkan form edit pengguna
-router.get('/users/edit/:id', async (req, res) => {
+router.get('/admin/users/edit/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         res.render('editUser ', { user });
@@ -74,10 +74,10 @@ router.get('/users/edit/:id', async (req, res) => {
 });
 
 // Rute untuk memperbarui pengguna
-router.post('/users/edit/:id', async (req, res) => {
-    const { name, email, age } = req.body;
+router.post('/admin/users/edit/:id', async (req, res) => {
+    const { username, email, apikey,limitApikey,role } = req.body;
     try {
-        await User.findByIdAndUpdate(req.params.id, { name, email, age });
+        await User.findByIdAndUpdate(req.params.id, { username, email, apikey,limitApikey,role });
         res.redirect('/users'); // Arahkan kembali ke daftar pengguna
     } catch (err) {
         res.status(500).send(err);
@@ -85,7 +85,7 @@ router.post('/users/edit/:id', async (req, res) => {
 });
 
 // Rute untuk menghapus pengguna
-router.post('/users/delete/:id', async (req, res) => {
+router.post('/admin/users/delete/:id', async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
         res.redirect('/users'); // Arahkan kembali ke daftar pengguna
