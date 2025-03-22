@@ -19,8 +19,14 @@ const Recaptcha = require('express-recaptcha').RecaptchaV2;
 const recaptcha = new Recaptcha(recaptcha_key_1, recaptcha_key_2);
 
 //_______________________ ┏ Function ┓ _______________________\\
-
-
+function checkRole(role) {
+    return function(req, res, next) {
+        if (req.isAuthenticated() && req.user.role === role) {
+            return next(); // Jika pengguna terautentikasi dan memiliki peran yang sesuai, lanjutkan ke rute berikutnya
+        }
+        res.status(403).send('Access denied'); // Jika tidak, kirimkan pesan akses ditolak
+    };
+}
 function checkAuth(req, res, next) {
     if (req.isAuthenticated()) {
         res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, post-check=0, pre-check=0');
@@ -83,12 +89,25 @@ router.get('/login', recaptcha.middleware.render, (req, res) => {
     
 });
 
-
 router.post('/login', recaptcha.middleware.verify, captchaLogin, (req, res, next) => {
-    passport.authenticate('local', {
-        failureRedirect: '/login',
-        successRedirect: '/dashboard',
-        failureFlash: true,
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.redirect('/login'); // Jika login gagal, arahkan kembali ke halaman login
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                return next(err);
+            }
+            // Arahkan pengguna berdasarkan peran mereka
+            if (user.role === 'admin') {
+                return res.redirect('/admin'); // Arahkan admin ke halaman admin
+            } else {
+                return res.redirect('/dashboard'); // Arahkan pengguna biasa ke dashboard
+            }
+        });
     })(req, res, next);
 });
 
@@ -157,7 +176,8 @@ router.post('/signup', recaptcha.middleware.verify, captchaRegister, async(req, 
                             email: email,
                             password: hash,
                             apikey: generateApiKey({ method: 'bytes', length: 8 }),
-                            limitApikey : LimitApikey
+                            limitApikey : LimitApikey,
+                            role : role 
 
                         }).save((err, data) => {
                             if (err) throw err;

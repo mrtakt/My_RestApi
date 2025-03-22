@@ -87,24 +87,6 @@ async function limitapikey(apikey) {
   );
 }
 //―――――――――――――――――――――――――――――――――――――――――― ┏  ANIMEBATCH  ┓ ―――――――――――――――――――――――――――――――――――――――――― \\
-const {
-  getOngoingAnime,
-  getScheeduleAnime,
-  getPropertiesAnime,
-  getPropertiesGenre,
-  getDetailsAnime,
-  getSearchAnime,
-  getRecentRelease,
-  getAnimeEpisode,
-} = require("./kuramanime");
-router.get("/api/anime/kuramanime/ongoing", getOngoingAnime)
-router.get("/api/anime/kuramanime/schedule", getScheeduleAnime)
-router.get("/api/anime/kuramanime/properties", getPropertiesAnime)
-router.get("/api/anime/kuramanime/properties/genre/:genreName", getPropertiesGenre)
-router.get("/api/anime/kuramanime/details/anime/:animeId/:animeIdTitle", getDetailsAnime)
-router.get("/api/anime/kuramanime/search", getSearchAnime)
-router.get("/api/anime/kuramanime/recent", getRecentRelease)
-
 //―――――――――――――――――――――――――――――――――――――――――― ┏  AI  ┓ ―――――――――――――――――――――――――――――――――――――――――― \\
 router.get("/api/ai/bard", cekKey, async (req, res, next) => {
   var text1 = req.query.text;

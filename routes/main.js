@@ -12,6 +12,14 @@ const dataweb = require('../model/DataWeb');
 const User = require('../model/user');
 
 //_______________________ ┏ Function ┓ _______________________\\
+function checkRole(role) {
+  return function(req, res, next) {
+      if (req.isAuthenticated() && req.user.role === role) {
+          return next(); // Jika pengguna terautentikasi dan memiliki peran yang sesuai, lanjutkan ke rute berikutnya
+      }
+      res.status(403).send('Access denied'); // Jika tidak, kirimkan pesan akses ditolak
+  };
+}
 
 function checkAuth(req, res, next) {
     if (req.isAuthenticated()) {
@@ -34,6 +42,13 @@ async function getApikey(id) {
 
 router.get('/', (req, res) => {
         res.render("home");
+});
+
+router.get('/admin', checkRole('admin'), async (req, res) => {
+  let getinfo =  await getApikey(req.user.id)
+  let { apikey, username, checklimit, isVerified , RequestToday , email,role } = getinfo
+    res.render("admin", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email ,role: role});
+    
 });
 
 router.get('/dashboard',  checkAuth, async (req, res) => {

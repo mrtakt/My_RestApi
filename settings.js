@@ -5,11 +5,12 @@ require("dotenv").config();
 creator = "Yukkkiii";
 port = 3002; //port host
 LimitApikey = 2000;
+role = "user"
 
 //___________ ┏  Database Mongodb Setting  ┓ ___________\\
 
 keymongodb =
-  "mongodb+srv://mochyukiw:anjay123@cluster0.we50obk.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://yukiajjah:Anjay123@cluster0.ie43m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 //___________ ┏  SMTP Setting  ┓ ___________\\
 

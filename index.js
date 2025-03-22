@@ -71,7 +71,7 @@ cron.schedule(
   },
   {
     scheduled: true,
-    timezone: "Asia/Kuala_Lumpur",
+    timezone: "Asia/Jakarta",
   }
 );
 
@@ -83,7 +83,7 @@ cron.schedule(
   },
   {
     scheduled: true,
-    timezone: "Asia/Kuala_Lumpur",
+    timezone: "Asia/Jakarta",
   }
 );
 
