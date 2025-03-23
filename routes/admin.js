@@ -8,11 +8,13 @@ const passport = require("passport");
 require("../controller/passportLocal")(passport);
 const dataweb = require("../model/DataWeb");
 const User = require("../model/user");
+//const Users = require('../controller/crud');
 const bcryptjs = require("bcryptjs");
 //_______________________ ┏ Function ┓ _______________________\\
 function checkRole(role) {
   return function (req, res, next) {
     if (req.isAuthenticated() && req.user.role === role) {
+      res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, post-check=0, pre-check=0');
       return next(); // Jika pengguna terautentikasi dan memiliki peran yang sesuai, lanjutkan ke rute berikutnya
     }
     res.redirect("/dashboard");
@@ -57,31 +59,70 @@ router.get("/userdata", checkRole("admin"), async (req, res) => {
     verified: isVerified,
     email: email,
     role: role,
-    items: datas,
+    items: datas
   });
 });
 
-router.get('/admin/database', async (req, res) => {
+router.post('/userdata/', async (req, res) => {
+  const { username, password, email, apikey, isVerified, role, limitApikey } = req.body;
   try {
-      const dataList = await User.find();
-      res.json(dataList);
-  } catch (error) {
-      res.status(500).json({ message: error.message });
+    User.create({ username, password, email, apikey, isVerified, role, limitApikey });
+    res.render("admin/datalist", {
+      username: username,
+      verified: isVerified,
+      email: email,
+      role: role,
+      items: datas
+    });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 });
-router.delete('/deleteuser/:id', async (req, res) => {
-  try {
-      const { id } = req.params;
-      const deletedData = await User.findByIdAndDelete(id);
-      if (!deletedData) {
-          return res.status(404).json({ message: 'Data not found' });
-      }
-
-      res.json({ message: 'Data deleted successfully', deletedData });
-  } catch (error) {
-      res.status(500).json({ message: error.message });
-  }
+router.delete('/users/:_id', async (req, res) => {
+    const { _id } = req.params;
+    try {
+        const deletedItem = await User.findByIdAndDelete(_id);
+        if (!deletedItem) {
+            return res.status(404).json({ message: 'Item not found' });
+        }
+        res.status(200).json({ message: 'Item deleted successfully', deletedItem });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting item', error });
+    }
 });
 //_______________________ ┏ END ┓ _______________________\\
 
 module.exports = router;
+
+
+
+
+/*const {
+  createUser,
+  getUser,
+  getUserById,
+  updateUser,
+  deleteUser,
+  deleteAllUser,
+  findUserByCondition
+} = require('../controller/crud');
+// Create a new product
+router.post('/user', createUser);
+
+// Retrieve all User
+router.get('/user', getUser);
+
+// Retrieve a single product
+router.get('/user/:id', getUserById);
+
+// Update a product
+router.put('/user/:id', updateUser);
+
+// Delete a product
+router.delete('/user/:id', deleteUser);
+
+// Delete all User
+router.delete('/user', deleteAllUser);
+
+// Find User by condition
+router.post('/user/search', findUserByCondition);*/

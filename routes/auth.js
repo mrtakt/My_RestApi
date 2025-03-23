@@ -76,7 +76,7 @@ router.get("/login", recaptcha.middleware.render, (req, res) => {
     res.redirect("/dashboard");
   } else {
     res.render("login", {
-      csrfToken: req.csrfToken(),
+      //csrfToken: req.csrfToken(),
       recaptcha: res.recaptcha,
     });
   }
@@ -114,7 +114,7 @@ router.get("/signup", recaptcha.middleware.render, (req, res) => {
     res.redirect("/dashboard");
   } else {
     res.render("signup", {
-      csrfToken: req.csrfToken(),
+      //csrfToken: req.csrfToken(),
       recaptcha: res.recaptcha,
     });
   }
@@ -275,7 +275,7 @@ router.get(
   recaptcha.middleware.render,
   async (req, res) => {
     res.render("forgot-password.ejs", {
-      csrfToken: req.csrfToken(),
+      //csrfToken: req.csrfToken(),
       recaptcha: res.recaptcha,
     });
   }
@@ -331,7 +331,7 @@ router.get("/reset-password", recaptcha.middleware.render, async (req, res) => {
     var check = await resetToken.findOne({ token: token });
     if (check) {
       res.render("forgot-password.ejs", {
-        csrfToken: req.csrfToken(),
+        //csrfToken: req.csrfToken(),
         recaptcha: res.recaptcha,
         reset: true,
         email: check.email,

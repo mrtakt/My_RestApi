@@ -12,7 +12,7 @@ const expressSession = require("express-session");
 const MemoryStore = require("memorystore")(expressSession);
 const passport = require("passport");
 const flash = require("connect-flash");
-const csrf = require("csurf");
+//const csrf = require("csurf");
 const cron = require("node-cron");
 const bodyParser = require("body-parser");
 const User = require("./model/user");
@@ -51,7 +51,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.set("strictQuery", false);
 mongoose
-  .connect(keymongodb, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(keymongodb, { useNewUrlParser: true, useUnifiedTopology: true, dbName: dbname })
   .then(async () => {
     console.log("Connected !");
     let limit = await dataweb.findOne();
@@ -100,7 +100,7 @@ app.use(
     store: new MemoryStore(),
   })
 );
-app.use(csrf());
+//app.use(csrf());
 app.use(passport.initialize());
 app.use(express.static("public"));
 app.use(passport.session());
@@ -118,12 +118,12 @@ app.use(function (req, res, next) {
 app.use("/", main);
 app.use("/", api);
 app.use("/", admin);
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-app.use(function (err, req, res, next) {
-  res.render("404");
-});
+//app.use(function (req, res, next) {
+//  next(createError(404));
+//});
+//app.use(function (err, req, res, next) {
+//  res.render("404");
+//});
 
 module.exports = app;
 

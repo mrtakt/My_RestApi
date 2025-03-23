@@ -6,7 +6,7 @@ creator = "Yukkkiii";
 port = 3002; //port host
 LimitApikey = 2000;
 role = "user"
-
+dbname = "test"
 //___________ ┏  Database Mongodb Setting  ┓ ___________\\
 
 keymongodb =

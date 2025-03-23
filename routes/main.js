@@ -122,6 +122,7 @@ router.get('/nsfw',  checkAuth, async (req, res) => {
 });
 //_______________________ ┏ Router Docs Api End ┓ _______________________\\
 
+
 router.get("/logout", (req, res) => {
     req.logout(req.user, err => {
       if(err) return next(err);
