@@ -26,7 +26,7 @@
             <!--begin::Primary menu-->
             <div id="kt_aside_menu" class="menu menu-column menu-title-gray-600 menu-icon-gray-400 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold fs-5" data-kt-menu="true">
               <div class="menu-item py-2">
-                <a class="menu-link active menu-center" href="/admin" title="Dashboard" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                <a class="menu-link menu-center" href="/admin" title="Dashboard" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                   <span class="menu-icon me-0">
                     <!--begin::Svg Icon | path: icons/duotone/Home/Home2.svg-->
                     <span class="svg-icon svg-icon-1">
@@ -64,7 +64,7 @@
                 </a>
               </div>
               <div class="menu-item py-2">
-                <a class="menu-link menu-center" href="/admin/userdata" title="UserData" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                <a class="menu-link active menu-center" href="/userdata" title="UserData" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                   <span class="menu-icon me-0">
                     <span class="svg-icon svg-icon-1">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -255,7 +255,7 @@
                               Edit Data
                             </button>
                             <!--<a href="/edit/<%= item._id %>" class="btn btn-warning">Edit</a>-->
-                            <form action="/delete/<%= item._id %>" method="POST" style="display:inline;">
+                            <form action="#" method="POST" style="display:inline;">
                               <button type="submit" class="btn btn-danger">Hapus</button>
                             </form>
                           </td>
@@ -297,7 +297,7 @@
                         </div>
                       </div>
                       <div class="modal-body">
-                        <form action="" method="POST">
+                        <form action="#" method="POST">
                           <label for="exampleFormControlInput1" class="required form-label">Username</label>
                           <input type="text" name="username" class="form-control form-control-solid required " placeholder="Username" />
                           <label for="exampleFormControlInput1" class="required form-label">Email</label>
@@ -337,25 +337,25 @@
                         </div>
                       </div>
                       <div class="modal-body">
-                        <form action="/create" method="POST">
+                        <form action="/admin/tambah_user" method="POST">
                           <label for="exampleFormControlInput1" class="required form-label">Username</label>
-                          <input type="text" name="username" class="form-control form-control-solid required " placeholder="Username" />
+                          <input type="text" id="username" class="form-control form-control-solid required " placeholder="Username" />
                           <label for="exampleFormControlInput1" class="required form-label">Email</label>
-                          <input type="text" name="email" class="form-control form-control-solid required " placeholder="Email" />
+                          <input type="text" id="email" class="form-control form-control-solid required " placeholder="Email" />
                           <label for="exampleFormControlInput1" class="required form-label">Password</label>
-                          <input type="text" name="password" class="form-control form-control-solid required " placeholder="Password" />
+                          <input type="text" id="password" class="form-control form-control-solid required " placeholder="Password" />
                           <label for="exampleFormControlInput1" class="required form-label">Pilih Role</label>
-                          <select class="form-select form-select-solid" aria-label=" Role">
+                          <select class="form-select form-select-solid" aria-label=" Role" id="role">
                             <option>Role</option>
                             <option value="1">user</option>
                             <option value="2">premium</option>
                             <option value="3">admin</option>
                           </select>
-                          <input type="hidden" name="isVerified class=" form-control form-control-solid required " value=" true" />
+                          <input type="hidden" id="isVerified class=" form-control form-control-solid required " value=" true" />
                           <label for="exampleFormControlInput1" class="required form-label">Apikey</label>
-                          <input type="text" name="apikey" class="form-control form-control-solid required " placeholder="apikey" />
+                          <input type="text" id="apikey" class="form-control form-control-solid required " placeholder="apikey" />
                           <label for="exampleFormControlInput1" class="required form-label">LimitApikey</label>
-                          <input type="text" name="limitApikey" class="form-control form-control-solid required " placeholder="limit" />
+                          <input type="text" id="limitApikey" class="form-control form-control-solid required " placeholder="limit" />
                           <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>

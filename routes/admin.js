@@ -48,7 +48,7 @@ router.get("/admin", checkRole("admin"), async (req, res) => {
 });
 
 //_______________________ ┏ Router CRUD ┓ _______________________\\
-router.get("/dataku", checkRole("admin"), async (req, res) => {
+router.get("/userdata", checkRole("admin"), async (req, res) => {
   let getinfo = await getApikey(req.user.id);
   const datas = await User.find();
   let { username, isVerified, email, role } = getinfo;
@@ -61,7 +61,27 @@ router.get("/dataku", checkRole("admin"), async (req, res) => {
   });
 });
 
+router.get('/admin/database', async (req, res) => {
+  try {
+      const dataList = await User.find();
+      res.json(dataList);
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+});
+router.delete('/deleteuser/:id', async (req, res) => {
+  try {
+      const { id } = req.params;
+      const deletedData = await User.findByIdAndDelete(id);
+      if (!deletedData) {
+          return res.status(404).json({ message: 'Data not found' });
+      }
 
+      res.json({ message: 'Data deleted successfully', deletedData });
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+});
 //_______________________ ┏ END ┓ _______________________\\
 
 module.exports = router;

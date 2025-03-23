@@ -40,7 +40,8 @@ async function ResetRequestToday() {
 (cors = require("cors")), (secure = require("ssl-express-www"));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 var main = require("./routes/main"),
-  api = require("./routes/api");
+  api = require("./routes/api"),
+  admin = require("./routes/admin");
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/view");
 app.use(bodyParser.json());
@@ -116,6 +117,7 @@ app.use(function (req, res, next) {
 });
 app.use("/", main);
 app.use("/", api);
+app.use("/", admin);
 app.use(function (req, res, next) {
   next(createError(404));
 });
