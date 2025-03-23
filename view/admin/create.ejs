@@ -1,0 +1,40 @@
+<!-- views/create.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambah Item</title>
+</head>
+
+<body>
+  <h1>Tambah Item</h1>
+  <form action="/create" method="POST">
+    <label for="exampleFormControlInput1" class="required form-label">Username</label>
+    <input type="text" name="username" class="form-control form-control-solid required " placeholder="Username" />
+    <label for="exampleFormControlInput1" class="required form-label">Email</label>
+    <input type="text" name="email" class="form-control form-control-solid required " placeholder="Email" />
+    <label for="exampleFormControlInput1" class="required form-label">Password</label>
+    <input type="text" name="password" class="form-control form-control-solid required " placeholder="Password" />
+    <label for="exampleFormControlInput1" class="required form-label">Pilih Role</label>
+    <select class="form-select form-select-solid" aria-label=" Role">
+      <option>Role</option>
+      <option value="1">user</option>
+      <option value="2">premium</option>
+      <option value="3">admin</option>
+    </select>
+    <input type="hidden" name="isVerified class=" form-control form-control-solid required " value=" true" />
+    <label for="exampleFormControlInput1" class="required form-label">Apikey</label>
+    <input type="text" name="apikey" class="form-control form-control-solid required " placeholder="apikey" />
+    <label for="exampleFormControlInput1" class="required form-label">LimitApikey</label>
+    <input type="text" name="limitApikey" class="form-control form-control-solid required " placeholder="limit" />
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Simpan</button>
+    </div>
+  </form>
+  </form>
+</body>
+
+</html>
