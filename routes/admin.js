@@ -149,37 +149,12 @@ router.get('/userdata/search/:_id',checkRole("admin"), async (req, res) => {
       res.status(500).json({ message: 'Error fetching item', error });
   }
 });
-
+// Memperbarui Data Berdasarkan ID
+router.post('/userdata/edit/:_id', async (req, res) => {
+  await User.findByIdAndUpdate(req.params.id, req.body);
+  res.redirect('/');
+});
 //_______________________ ┏ END ┓ _______________________\\
 
 module.exports = router;
 
-/*const {
-  createUser,
-  getUser,
-  getUserById,
-  updateUser,
-  deleteUser,
-  deleteAllUser,
-  findUserByCondition
-} = require('../controller/crud');
-// Create a new product
-router.post('/user', createUser);
-
-// Retrieve all User
-router.get('/user', getUser);
-
-// Retrieve a single product
-router.get('/user/:id', getUserById);
-
-// Update a product
-router.put('/user/:id', updateUser);
-
-// Delete a product
-router.delete('/user/:id', deleteUser);
-
-// Delete all User
-router.delete('/user', deleteAllUser);
-
-// Find User by condition
-router.post('/user/search', findUserByCondition);*/

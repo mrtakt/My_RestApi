@@ -277,7 +277,7 @@
                             </div><!--<%= item.isVerified %>-->
                           </td>
                           <td>
-                            <button class="btn btn-warning" onclick="myFunction" data-bs-toggle="modal" data-bs-target="#editdata" id="loadData" data-id="<%= item._id %>">
+                            <button class="btn btn-warning" onclick="openEditModal('<%= item._id %>')" data-bs-toggle="modal">
                               Edit Data
                             </button>
                             <form action="/userdata/delete/<%= item._id %>" method="get" style="display:inline;">
@@ -319,26 +319,31 @@
                         </div>
                       </div>
                       <div class="modal-body">
-                        <form action="#" method="POST" id="userForm">
-                          <input type="hidden" name="_id" class=" form-control form-control-solid required" value="" />
-                          <label for="exampleFormControlInput1" class="required form-label">Username</label>
-                          <input type="text" name="username" class="form-control form-control-solid required " placeholder="Username" value="" />
-                          <label for="exampleFormControlInput1" class="required form-label">Email</label>
-                          <input type="text" name="email" class="form-control form-control-solid required " placeholder="Email" value=""/>
-                          <label for="exampleFormControlInput1" class="required form-label">Password</label>
-                          <input type="text" name="password" class="form-control form-control-solid required " placeholder="Password" value=""/>
-                          <label for="exampleFormControlInput1" class="required form-label">Pilih Role</label>
-                          <select class="form-select form-select-solid" aria-label=" Role">
+                        <form action="#" method="POST" id="editModal">
+                          <input type="hidden" id="_id" name="_id" class=" form-control form-control-solid required" value="" />
+                          <label for="exampleFormControlInput1" class="form-label">Username</label>
+                          <input type="text" id="username" name="username" class="form-control form-control-solid" placeholder="Username" value="" />
+                          <label for="exampleFormControlInput1" class="form-label">Email</label>
+                          <input type="text" id="email" name="email" class="form-control form-control-solid" placeholder="Email" value=""/>
+                          <label for="exampleFormControlInput1" class="form-label">Password</label>
+                          <input type="text" id="password" name="password" class="form-control form-control-solid" placeholder="Password" value=""/>
+                          <label for="exampleFormControlInput1" class="form-label">Verifikasi</label>
+                          <select class="form-select form-select-solid" aria-label="isVerified" name="isVerified" id="isVerified">
+                            <option>Verifikasi</option>
+                            <option value="false">Belum Verifikasi</option>
+                            <option value="true">Terverifikasi</option>
+                          </select>
+                          <label for="exampleFormControlInput1" class="form-label">Pilih Role</label>
+                          <select class="form-select form-select-solid" aria-label=" Role" name="role" id="role">
                             <option>Role</option>
                             <option value="user">user</option>
                             <option value="premium">premium</option>
                             <option value="admin">admin</option>
                           </select>
-                          
-                          <label for="exampleFormControlInput1" class="required form-label">Apikey</label>
-                          <input type="text" name="apikey" class="form-control form-control-solid required " placeholder="apikey" value=""/>
-                          <label for="exampleFormControlInput1" class="required form-label">LimitApikey</label>
-                          <input type="text" name="limitApikey" class="form-control form-control-solid required " placeholder="limit" value=""/>
+                          <label for="exampleFormControlInput1" class="form-label">Apikey</label>
+                          <input type="text" id="apikey" name="apikey" class="form-control form-control-solid  " placeholder="apikey" value=""/>
+                          <label for="exampleFormControlInput1" class="form-label">LimitApikey</label>
+                          <input type="text" id="limitApikey" name="limitApikey" class="form-control form-control-solid  " placeholder="limit" value=""/>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -397,26 +402,21 @@
     </div>
   </div>
   <!--begin::Javascript-->
-  <script>
-    function myFunction() {
-        const userId = this.getAttribute('data-id');
-        fetch(`/userdata/search/${userId}`)
-            .then(response => {
-                if (!response.ok) throw new Error('Network response was not ok');
-                return response.json();
-            })
-            .then(data => {
-                // Isi form dengan data yang diterima
-                document.getElementById('_id').value = data._id;
-                document.getElementById('username').value = data.username;
-                document.getElementById('password').value = data.password;
-                document.getElementById('email').value = data.email;
-                document.getElementById('role').value = data.role;
-                document.getElementById('apikey').value = data.apikey;
-                document.getElementById('limitApikey').value = data.limitApikey;
-            })
-            .catch(error => console.error('There was a problem with the fetch operation:', error));
-    };
+<script>
+    function openEditModal(_id) {
+    $.get(`/userdata/search/${_id}`, function(item) {
+      console.log(item)
+        $('#editId').val(item._id);
+        $('#username').val(item.username);
+        $('#email').val(item.email);
+        $('#apikey').val(item.apikey);
+        $('#limitApikey').val(item.limitApikey);
+        $('#role').val(item.role);
+        $('#isVerified').val(item.isVerified);
+        $('#editdata').modal('show');
+    });
+}
+
 </script>
   <!--begin::Global Javascript Bundle(used by all pages)-->
   <script src="plugins/plugins.bundle.js"></script>
