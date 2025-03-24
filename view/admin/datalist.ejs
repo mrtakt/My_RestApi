@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>YK Project | Rest Api</title>
-  <meta name="description" content="Free Rest Api." />
+  <title>YK Project | ADMIN </title>
+  <meta name="description" content="Rest Api." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="shortcut icon" href="images/icon.png" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
@@ -39,7 +39,7 @@
                 </a>
               </div>
               <div class="menu-item py-2">
-                <a class="menu-link menu-center" href="/ai" title="Data" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                <a class="menu-link menu-center" href="/userdata" title="Data" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                   <span class="menu-icon me-0">
                     <span class="svg-icon svg-icon-1">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -132,9 +132,9 @@
               </h1>
               <ul class="breadcrumb fw-bold fs-base my-1">
                 <li class="breadcrumb-item text-muted">
-                  <a href="#" class="text-muted">Rest Api</a>
+                  <a href="#" class="text-muted">Admin</a>
                 </li>
-                <li class="breadcrumb-item text-dark">Dashboard</li>
+                <li class="breadcrumb-item text-dark">Userdata</li>
               </ul>
             </div>
             <div class="d-flex d-lg-none align-items-center ms-n2 me-2">
@@ -204,9 +204,30 @@
                 <div class="card card-xxl-stretch mb-5 mb-xxl-8">
                   <div class="card-header border-0 pt-5">
                     <h3 class="card-title align-items-start flex-column">
-                      <span class="card-label fw-boldest fs-3 text-dark">Database</span>
+                      <span class="card-label fw-boldest fs-3 text-dark">User Database</span>
                       <span class="text-gray-400 mt-2 fw-bold fs-6">Data Selalu Di Update</span>
                     </h3>
+                    <div style="margin: 0 auto" class="col-12 col-md-6 col-lg-5 p-5 customborder">
+                      <% if( error !="" ){ %>
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong> Error </strong>
+                        <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                      <% } %> <% if( error_messages !="" ){ %>
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong> Error </strong>
+                        <%= error_messages %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                      <% } %> <% if( success_messages !="" ){ %>
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Berhasil</strong>
+                        <%= success_messages %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                      <% } %>
+                    </div>
                     <div class="card-toolbar">
                       <!--begin::Nav-->
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newdata">
@@ -214,9 +235,8 @@
                       </button>
                     </div>
                   </div>
-                  <div class="card-body p-0">
                     <!-- ==========================-->
-                    <table class="table table-hover table-rounded table-striped border gy-7 gs-7">
+                    <table class="table  table-striped border gy-7 gs-7">
                       <thead>
                         <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
                         </tr>
@@ -248,13 +268,19 @@
                             <%= item.limitApikey %>
                           </td>
                           <td>
-                            <%= item.isVerified %>
+                            <div class="d-flex flex-column">
+                              <% if(!item.isVerified){ %>
+                                <span class="badge badge-light-danger fw-bolder fs-8 px-2 py-1 ms-2">Belum Verifikasi</span>
+                                <% }else{ %>
+                                  <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Terverifikasi</span>
+                                  <% } %>
+                            </div><!--<%= item.isVerified %>-->
                           </td>
                           <td>
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editdata">
+                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editdata" id="loadData" data-id="<%= item._id %>">
                               Edit Data
                             </button>
-                            <form action="/userdata/<%= item._id %>" method="post" style="display:inline;">
+                            <form action="/userdata/delete/<%= item._id %>" method="get" style="display:inline;">
                               <button type="submit" class="btn btn-danger">Hapus</button>
                             </form>
                           </td>
@@ -262,20 +288,17 @@
                         <% }) %>
                       </tbody>
                     </table>
-                  </div>
+                  
                 </div>
                 <!--Logout-->
                 <div class="modal fade" tabindex="-1" id="logout">
                   <div class="modal-dialog">
                     <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Keluar</h5>
+                      <div class="modal-header bg-active-danger text-active-inverse-danger active">
+                        <h1 class="modal-title">Keluar</h1>
                         <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
                           <span class="svg-icon svg-icon-2x"></span>
                         </div>
-                      </div>
-                      <div class="modal-body">
-                        <p>Yakin Keluar Dari Akun Ini?</p>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
@@ -296,7 +319,7 @@
                         </div>
                       </div>
                       <div class="modal-body">
-                        <form action="#" method="POST">
+                        <form action="#" method="POST" id="userForm">
                           <label for="exampleFormControlInput1" class="required form-label">Username</label>
                           <input type="text" name="username" class="form-control form-control-solid required " placeholder="Username" />
                           <label for="exampleFormControlInput1" class="required form-label">Email</label>
@@ -306,9 +329,9 @@
                           <label for="exampleFormControlInput1" class="required form-label">Pilih Role</label>
                           <select class="form-select form-select-solid" aria-label=" Role">
                             <option>Role</option>
-                            <option value="1">user</option>
-                            <option value="2">premium</option>
-                            <option value="3">admin</option>
+                            <option value="user">user</option>
+                            <option value="premium">premium</option>
+                            <option value="admin">admin</option>
                           </select>
                           <input type="hidden" name="isVerified" class=" form-control form-control-solid required " value=" true" />
                           <label for="exampleFormControlInput1" class="required form-label">Apikey</label>
@@ -346,9 +369,9 @@
                           <label for="exampleFormControlInput1" class="required form-label">Pilih Role</label>
                           <select class="form-select form-select-solid" aria-label=" Role" name="role">
                             <option>Role</option>
-                            <option value="1">user</option>
-                            <option value="2">premium</option>
-                            <option value="3">admin</option>
+                            <option value="user">user</option>
+                            <option value="premium">premium</option>
+                            <option value="admin">admin</option>
                           </select>
                           <input type="hidden" name="isVerified" value=" true" />
                           <label for="exampleFormControlInput1" class="required form-label">Apikey</label>
@@ -374,25 +397,28 @@
   </div>
   <!--begin::Javascript-->
   <script>
-    function cb(response) {
-      document.getElementById("visitor").innerText = response.value;
-    }
-  </script>
+    document.getElementById('loadData').addEventListener('click', function() {
+        const userId = this.getAttribute('data-id');
+        fetch(`/userdata/search/${userId}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                // Isi form dengan data yang diterima
+                document.getElementById('username').value = data.username;
+                document.getElementById('password').value = data.password;
+                document.getElementById('email').value = data.email;
+                document.getElementById('role').value = data.role;
+                document.getElementById('apikey').value = data.apikey;
+                document.getElementById('limitApikey').value = data.limitApikey;
+            })
+            .catch(error => console.error('There was a problem with the fetch operation:', error));
+    });
+</script>
   <!--begin::Global Javascript Bundle(used by all pages)-->
   <script src="plugins/plugins.bundle.js"></script>
   <script src="js/scripts.bundle.js"></script>
-  <script>
-    window.setTimeout("waktu()", 1000);
-
-    function waktu() {
-      var d = new Date();
-      const jam = d.getHours();
-      const menit = d.getMinutes();
-      const detik = d.getSeconds();
-      setTimeout("waktu()", 1000);
-      document.getElementById("JamSekarang").innerHTML = jam + ":" + menit
-    }
-  </script>
   <!--end::Global Javascript Bundle-->
   <!--begin::Page Custom Javascript(used by this page)-->
   <script src="js/custom/widgets.js"></script>

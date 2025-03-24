@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>YK Project | Rest Api</title>
-  <meta name="description" content="Free Rest Api." />
+  <title>YK Project | ADMIN </title>
+  <meta name="description" content="Rest Api." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="shortcut icon" href="images/icon.png" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
@@ -170,7 +170,7 @@
               </h1>
               <ul class="breadcrumb fw-bold fs-base my-1">
                 <li class="breadcrumb-item text-muted">
-                  <a href="#" class="text-muted">Rest Api</a>
+                  <a href="#" class="text-muted">Admin</a>
                 </li>
                 <li class="breadcrumb-item text-dark">Dashboard</li>
               </ul>
@@ -247,7 +247,7 @@
                   <div class="card-header border-0 pt-5">
                     <h3 class="card-title align-items-start flex-column">
                       <span class="card-label fw-boldest fs-3 text-dark">Welcome <%= username %></span>
-                      <span class="text-gray-400 mt-2 fw-bold fs-6">Gunakan Rest Api Dengan Baik</span>
+                      <span class="text-gray-400 mt-2 fw-bold fs-6">Admin Dashboard</span>
                     </h3>
                     <div class="card-toolbar">
                       <!--begin::Nav-->
@@ -367,9 +367,8 @@
                     <div class="modal fade" tabindex="-1" id="logout">
                       <div class="modal-dialog">
                         <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title">Keluar</h5>
-
+                          <div class="modal-header bg-active-danger text-active-inverse-danger active ">
+                            <h1 class="modal-title ">Keluar</h1>
                             <!--begin::Close-->
                             <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
                               aria-label="Close">
@@ -377,11 +376,6 @@
                             </div>
                             <!--end::Close-->
                           </div>
-
-                          <div class="modal-body">
-                            <p>Yakin Keluar Dari Akun Ini?</p>
-                          </div>
-
                           <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                             <a class="btn btn-danger" href="/logout">Keluar</a>
@@ -420,7 +414,8 @@
   </script>
   <!--end::Global Javascript Bundle-->
   <!--begin::Page Custom Javascript(used by this page)-->
-  <script src="js/custom/widgets.js"></script>
+  <script src="js/widgets.js"></script>
+  <script src="js/typed.js"></script>
   <!--end::Page Custom Javascript-->
   <!--end::Javascript-->
 </body>

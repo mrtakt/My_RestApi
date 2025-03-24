@@ -14,7 +14,10 @@ const bcryptjs = require("bcryptjs");
 function checkRole(role) {
   return function (req, res, next) {
     if (req.isAuthenticated() && req.user.role === role) {
-      res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, post-check=0, pre-check=0');
+      res.set(
+        "Cache-Control",
+        "no-cache, private, no-store, must-revalidate, post-check=0, pre-check=0"
+      );
       return next(); // Jika pengguna terautentikasi dan memiliki peran yang sesuai, lanjutkan ke rute berikutnya
     }
     res.redirect("/dashboard");
@@ -59,43 +62,97 @@ router.get("/userdata", checkRole("admin"), async (req, res) => {
     verified: isVerified,
     email: email,
     role: role,
-    items: datas
+    items: datas,
   });
 });
-
-router.post('/userdata/', async (req, res) => {
-  const { username, password, email, apikey, isVerified, role, limitApikey } = req.body;
-  try {
-    User.create({ username, password, email, apikey, isVerified, role, limitApikey });
-    res.render("admin/datalist", {
-      username: username,
-      verified: isVerified,
-      email: email,
-      role: role,
-      items: datas
-    });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
-router.delete('/users/:_id', async (req, res) => {
-    const { _id } = req.params;
-    try {
-        const deletedItem = await User.findByIdAndDelete(_id);
-        if (!deletedItem) {
-            return res.status(404).json({ message: 'Item not found' });
+/// Menambah Data
+router.post("/userdata/", checkRole("admin"),async (req, res) => {
+  const { username, password, email, apikey, role, limitApikey } = req.body;
+  if (!email || !username || !password || !apikey || !role || !limitApikey) {
+      req.flash("error_messages", "Semua Form Harus Diisi !");
+      res.redirect('/userdata')
+    } else if (username.length < 4) {
+      req.flash("error_messages", "Username harus minimal 4 karakter");
+      res.redirect('/userdata')
+    } else if (username.length > 20) {
+      req.flash(
+        "error_messages",
+        "Limit Username tidak boleh lebih 20 karakter"
+      );
+      res.redirect('/userdata')
+    } else {
+      User.findOne(
+        { $or: [{ email: email }, { username: username }] },
+        function (err, data) {
+          if (err) throw err;
+          if (data) {
+            req.flash("error_messages", "User Sudah Ada, Coba Kembali !");
+            res.redirect('/userdata')
+          } else {
+            bcryptjs.genSalt(12, (err, salt) => {
+              if (err) throw err;
+              bcryptjs.hash(password, salt, (err, hash) => {
+                if (err) throw err;
+                User({
+                  username: username,
+                  email: email,
+                  password: hash,
+                  apikey: apikey,
+                  limitApikey: limitApikey,
+                  role: role,
+                }).save((err, data) => {
+                  if (err) throw err;
+                  req.flash("success_messages", "Akun Berhasil Dibuat !");
+                  res.redirect('/userdata')
+                });
+              });
+            });
+          }
         }
-        res.status(200).json({ message: 'Item deleted successfully', deletedItem });
-    } catch (error) {
-        res.status(500).json({ message: 'Error deleting item', error });
+      );
     }
 });
+// Menghapus data berdasarkan ID
+router.get("/userdata/delete/:_id", checkRole("admin"), async (req, res) => {
+  const { _id } = req.params;
+  try {
+    const deletedItem = await User.findByIdAndDelete(_id);
+    if (!deletedItem) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+    req.flash("success_messages", "Akun Berhasil Dihapus !");
+    res.redirect('/userdata')
+  } catch (error) {
+    req.flash("error_messages", "Kesalahan Saat Menghapus Data !");
+    res.redirect('/userdata')
+  }
+});
+// Mengambil Seluruh Data
+router.get('/userdata/all',checkRole("admin"), async (req, res) => {
+  try {
+      const user = await User.find();
+      res.status(200).json(user);
+  } catch (error) {
+      res.status(500).json({ message: 'Error fetching items', error });
+  }
+});
+// Mengambil data berdasarkan ID
+router.get('/userdata/search/:_id',checkRole("admin"), async (req, res) => {
+  const { _id } = req.params;
+  try {
+      const user = await User.findById(_id);
+      if (!user) {
+          return res.status(404).json({ message: 'Item not found' });
+      }
+      res.status(200).json(user);
+  } catch (error) {
+      res.status(500).json({ message: 'Error fetching item', error });
+  }
+});
+
 //_______________________ ┏ END ┓ _______________________\\
 
 module.exports = router;
-
-
-
 
 /*const {
   createUser,
