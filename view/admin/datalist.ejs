@@ -277,7 +277,7 @@
                             </div><!--<%= item.isVerified %>-->
                           </td>
                           <td>
-                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editdata" id="loadData" data-id="<%= item._id %>">
+                            <button class="btn btn-warning" onclick="myFunction" data-bs-toggle="modal" data-bs-target="#editdata" id="loadData" data-id="<%= item._id %>">
                               Edit Data
                             </button>
                             <form action="/userdata/delete/<%= item._id %>" method="get" style="display:inline;">
@@ -320,12 +320,13 @@
                       </div>
                       <div class="modal-body">
                         <form action="#" method="POST" id="userForm">
+                          <input type="hidden" name="_id" class=" form-control form-control-solid required" value="" />
                           <label for="exampleFormControlInput1" class="required form-label">Username</label>
-                          <input type="text" name="username" class="form-control form-control-solid required " placeholder="Username" />
+                          <input type="text" name="username" class="form-control form-control-solid required " placeholder="Username" value="" />
                           <label for="exampleFormControlInput1" class="required form-label">Email</label>
-                          <input type="text" name="email" class="form-control form-control-solid required " placeholder="Email" />
+                          <input type="text" name="email" class="form-control form-control-solid required " placeholder="Email" value=""/>
                           <label for="exampleFormControlInput1" class="required form-label">Password</label>
-                          <input type="text" name="password" class="form-control form-control-solid required " placeholder="Password" />
+                          <input type="text" name="password" class="form-control form-control-solid required " placeholder="Password" value=""/>
                           <label for="exampleFormControlInput1" class="required form-label">Pilih Role</label>
                           <select class="form-select form-select-solid" aria-label=" Role">
                             <option>Role</option>
@@ -333,11 +334,11 @@
                             <option value="premium">premium</option>
                             <option value="admin">admin</option>
                           </select>
-                          <input type="hidden" name="isVerified" class=" form-control form-control-solid required " value=" true" />
+                          
                           <label for="exampleFormControlInput1" class="required form-label">Apikey</label>
-                          <input type="text" name="apikey" class="form-control form-control-solid required " placeholder="apikey" />
+                          <input type="text" name="apikey" class="form-control form-control-solid required " placeholder="apikey" value=""/>
                           <label for="exampleFormControlInput1" class="required form-label">LimitApikey</label>
-                          <input type="text" name="limitApikey" class="form-control form-control-solid required " placeholder="limit" />
+                          <input type="text" name="limitApikey" class="form-control form-control-solid required " placeholder="limit" value=""/>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -397,7 +398,7 @@
   </div>
   <!--begin::Javascript-->
   <script>
-    document.getElementById('loadData').addEventListener('click', function() {
+    function myFunction() {
         const userId = this.getAttribute('data-id');
         fetch(`/userdata/search/${userId}`)
             .then(response => {
@@ -406,6 +407,7 @@
             })
             .then(data => {
                 // Isi form dengan data yang diterima
+                document.getElementById('_id').value = data._id;
                 document.getElementById('username').value = data.username;
                 document.getElementById('password').value = data.password;
                 document.getElementById('email').value = data.email;
@@ -414,7 +416,7 @@
                 document.getElementById('limitApikey').value = data.limitApikey;
             })
             .catch(error => console.error('There was a problem with the fetch operation:', error));
-    });
+    };
 </script>
   <!--begin::Global Javascript Bundle(used by all pages)-->
   <script src="plugins/plugins.bundle.js"></script>
