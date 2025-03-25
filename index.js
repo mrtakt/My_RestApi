@@ -58,7 +58,7 @@ mongoose
     if (limit === null) {
       let obj = { RequestToday: 0 };
       await dataweb.create(obj);
-      console.log("DATA WEBSITE Sussces Create");
+      console.log("Data Berhasil Dibuat");
     }
   });
 
