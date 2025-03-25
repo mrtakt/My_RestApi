@@ -8,7 +8,6 @@ const passport = require("passport");
 require("../controller/passportLocal")(passport);
 const dataweb = require("../model/DataWeb");
 const User = require("../model/user");
-//const Users = require('../controller/crud');
 const bcryptjs = require("bcryptjs");
 //_______________________ ┏ Function ┓ _______________________\\
 function checkRole(role) {
@@ -66,7 +65,7 @@ router.get("/userdata", checkRole("admin"), async (req, res) => {
   });
 });
 /// Menambah Data
-router.post("/userdata/", checkRole("admin"),async (req, res) => {
+router.post("/userdata/tambah", checkRole("admin"),async (req, res) => {
   const { username, password, email, apikey, role, limitApikey } = req.body;
   if (!email || !username || !password || !apikey || !role || !limitApikey) {
       req.flash("error_messages", "Semua Form Harus Diisi !");
@@ -128,7 +127,7 @@ router.get("/userdata/delete/:_id", checkRole("admin"), async (req, res) => {
   }
 });
 // Mengambil Seluruh Data
-router.get('/userdata/all',checkRole("admin"), async (req, res) => {
+router.get('/userdata/all', async (req, res) => {
   try {
       const user = await User.find();
       res.status(200).json(user);
@@ -150,11 +149,40 @@ router.get('/userdata/search/:_id',checkRole("admin"), async (req, res) => {
   }
 });
 // Memperbarui Data Berdasarkan ID
-router.post('/userdata/edit/:_id', async (req, res) => {
-  await User.findByIdAndUpdate(req.params.id, req.body);
-  res.redirect('/');
+router.post('/userdata/update', async (req, res) => {
+  const { _id, username, email, password, apikey, limitApikey, role, isVerified } = req.body;
+  try {
+  if (!_id) {
+        req.flash("error_messages", "ID Tidak ditemukan");
+        res.redirect(`/userdata`);
+      } else {
+        var salt = await bcryptjs.genSalt(12);
+        var hash = await bcryptjs.hash(password, salt);
+        await User.findOneAndUpdate(
+          { _id: _id },
+          { $set: { username: username ,
+            password : hash,
+            email : email,
+            apikey : apikey,
+            limitApikey : limitApikey,
+            role : role
+          } }
+        );
+        req.flash("success_messages", "Data Berhasil Di Update");
+        res.redirect("/userdata");
+      } 
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+  }   
 });
 //_______________________ ┏ END ┓ _______________________\\
 
 module.exports = router;
 
+/*const update = User.findByIdAndUpdate(_id);
+      update.username = username,
+      update.email = email,
+      update.apikey = apikey,
+      update.limitApikey = limitApikey,
+      update.role = role,
+      res.redirect('/userdata');*/

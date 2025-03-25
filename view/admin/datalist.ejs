@@ -319,23 +319,16 @@
                         </div>
                       </div>
                       <div class="modal-body">
-                        <form action="#" method="POST" id="editModal">
+                        <form method="POST" id="editModal" action="/userdata/update">
                           <input type="hidden" id="_id" name="_id" class=" form-control form-control-solid required" value="" />
                           <label for="exampleFormControlInput1" class="form-label">Username</label>
                           <input type="text" id="username" name="username" class="form-control form-control-solid" placeholder="Username" value="" />
-                          <label for="exampleFormControlInput1" class="form-label">Email</label>
-                          <input type="text" id="email" name="email" class="form-control form-control-solid" placeholder="Email" value=""/>
                           <label for="exampleFormControlInput1" class="form-label">Password</label>
-                          <input type="text" id="password" name="password" class="form-control form-control-solid" placeholder="Password" value=""/>
-                          <label for="exampleFormControlInput1" class="form-label">Verifikasi</label>
-                          <select class="form-select form-select-solid" aria-label="isVerified" name="isVerified" id="isVerified">
-                            <option>Verifikasi</option>
-                            <option value="false">Belum Verifikasi</option>
-                            <option value="true">Terverifikasi</option>
-                          </select>
+                          <input type="text" id="password" name="password" class="form-control form-control-solid" placeholder="Username" value="" />
+                          <label for="exampleFormControlInput1" class="form-label">Email</label>
+                          <input type="text" id="email" name="email" class="form-control form-control-solid" placeholder="Username" value="" />
                           <label for="exampleFormControlInput1" class="form-label">Pilih Role</label>
                           <select class="form-select form-select-solid" aria-label=" Role" name="role" id="role">
-                            <option>Role</option>
                             <option value="user">user</option>
                             <option value="premium">premium</option>
                             <option value="admin">admin</option>
@@ -365,7 +358,7 @@
                         </div>
                       </div>
                       <div class="modal-body">
-                        <form action="/userdata" method="POST">
+                        <form action="/userdata/tambah" method="POST">
                           <label for="exampleFormControlInput1" class="required form-label">Username</label>
                           <input type="text" name="username" class="form-control form-control-solid required " placeholder="Username" />
                           <label for="exampleFormControlInput1" class="required form-label">Email</label>
@@ -374,7 +367,6 @@
                           <input type="text" name="password" class="form-control form-control-solid required " placeholder="Password" />
                           <label for="exampleFormControlInput1" class="required form-label">Pilih Role</label>
                           <select class="form-select form-select-solid" aria-label=" Role" name="role">
-                            <option>Role</option>
                             <option value="user">user</option>
                             <option value="premium">premium</option>
                             <option value="admin">admin</option>
@@ -405,9 +397,9 @@
 <script>
     function openEditModal(_id) {
     $.get(`/userdata/search/${_id}`, function(item) {
-      console.log(item)
-        $('#editId').val(item._id);
+        $('#_id').val(item._id);
         $('#username').val(item.username);
+        $('#password').val(item.password);
         $('#email').val(item.email);
         $('#apikey').val(item.apikey);
         $('#limitApikey').val(item.limitApikey);
