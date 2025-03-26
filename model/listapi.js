@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 
 const apiSchema = new mongoose.Schema({
+    nama: {
+        type: String,
+        required: true,
+    },
     kategori: {
         type: String,
         required: true,
     },
     premium: {
         type: String,
-        required: true,
     },
     url: {
         type: String,
@@ -17,4 +20,4 @@ const apiSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('listapi', apiSchema);
+module.exports = mongoose.model('listApi', apiSchema);

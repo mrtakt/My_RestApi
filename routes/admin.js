@@ -8,6 +8,7 @@ const passport = require("passport");
 require("../controller/passportLocal")(passport);
 const dataweb = require("../model/DataWeb");
 const User = require("../model/user");
+const listApi = require("../model/listapi");
 const bcryptjs = require("bcryptjs");
 //_______________________ ┏ Function ┓ _______________________\\
 function checkRole(role) {
@@ -38,8 +39,7 @@ async function getApikey(id) {
 
 router.get("/admin", checkRole("admin"), async (req, res) => {
   let getinfo = await getApikey(req.user.id);
-  let { apikey, username, checklimit, isVerified, RequestToday, email, role } =
-    getinfo;
+  let { apikey, username, checklimit, isVerified, RequestToday, email, role } = getinfo;
   res.render("admin/admin", {
     username: username,
     verified: isVerified,
@@ -51,12 +51,12 @@ router.get("/admin", checkRole("admin"), async (req, res) => {
   });
 });
 
-//_______________________ ┏ Router CRUD ┓ _______________________\\
+//_______________________ ┏ Router CRUD USERDATA ┓ _______________________\\
 router.get("/userdata", checkRole("admin"), async (req, res) => {
   let getinfo = await getApikey(req.user.id);
   const datas = await User.find();
   let { username, isVerified, email, role } = getinfo;
-  res.render("admin/datalist", {
+  res.render("admin/userlist", {
     username: username,
     verified: isVerified,
     email: email,
@@ -127,7 +127,7 @@ router.get("/userdata/delete/:_id", checkRole("admin"), async (req, res) => {
   }
 });
 // Mengambil Seluruh Data
-router.get('/userdata/all', async (req, res) => {
+router.get('/userdata/all',checkRole("admin"), async (req, res) => {
   try {
       const user = await User.find();
       res.status(200).json(user);
@@ -149,7 +149,7 @@ router.get('/userdata/search/:_id',checkRole("admin"), async (req, res) => {
   }
 });
 // Memperbarui Data Berdasarkan ID
-router.post('/userdata/update', async (req, res) => {
+router.post('/userdata/update', checkRole("admin"), async (req, res) => {
   const { _id, username, email, password, apikey, limitApikey, role, isVerified } = req.body;
   try {
   if (!_id) {
@@ -175,14 +175,100 @@ router.post('/userdata/update', async (req, res) => {
       res.status(400).json({ message: err.message });
   }   
 });
+//_______________________ ┏ Router CRUD APIDATA ┓ _______________________\\
+// Read All Users (Tampilkan daftar pengguna)
+router.get("/apidata", checkRole("admin"), async (req, res) => {
+  const api = await listApi.find();
+  let getinfo = await getApikey(req.user.id);
+  let { apikey, username, checklimit, isVerified, RequestToday, email, role } =
+    getinfo;
+  res.render("admin/apilist", {
+    username: username,
+    verified: isVerified,
+    apikey: apikey,
+    limit: checklimit,
+    RequestToday: RequestToday,
+    email: email,
+    role: role,
+    api,
+  });
+}); // Render tampilan dengan data pengguna
+
+
+//_______________________ ┏ Router CRUD ┓ _______________________\\
+
+// Create User
+router.post("/apidata", checkRole("admin"), async (req, res) => {
+  const api = new listApi(req.body);
+  try {
+    const savedUser = await api.save();
+    res.redirect("/apidata"); // Redirect ke daftar pengguna setelah berhasil menambah
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// Update User
+router.post("/apidata/edit", checkRole("admin"), async (req, res) => {
+  const {
+    _id,
+    nama,
+    kategori,
+    premium,
+    url,
+    metode,
+  } = req.body;
+  try {
+    if (!_id) {
+      req.flash("error_messages", "ID Tidak ditemukan");
+      res.redirect(`/apidata`);
+    } else {
+      await listApi.findOneAndUpdate(
+        { _id: _id },
+        {
+          $set: {
+            nama: nama,
+            kategori: kategori,
+            metode: metode,
+            premium: premium,
+            url: url,
+          },
+        }
+      );
+      req.flash("success_messages", "Data Berhasil Di Update");
+      res.redirect("/apidata");
+    }
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// Delete User
+router.post("/apidata/delete/:id", checkRole("admin"), async (req, res) => {
+  try {
+    const api = await listApi.findByIdAndDelete(req.params.id);
+    if (!api) return res.status(404).json({ message: "Api  not found" });
+    res.redirect("/apidata"); // Redirect ke daftar pengguna setelah berhasil menghapus
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Mengambil data berdasarkan ID
+router.get("/apidata/search/:_id", checkRole("admin"), checkRole("admin"), async (req, res) => {
+  const { _id } = req.params;
+  try {
+    const api = await listApi.findById(_id);
+    if (!api) {
+      return res.status(404).json({ message: "Data not found" });
+    }
+    res.status(200).json(api);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching item", error });
+  }
+});
+
 //_______________________ ┏ END ┓ _______________________\\
 
 module.exports = router;
 
-/*const update = User.findByIdAndUpdate(_id);
-      update.username = username,
-      update.email = email,
-      update.apikey = apikey,
-      update.limitApikey = limitApikey,
-      update.role = role,
-      res.redirect('/userdata');*/

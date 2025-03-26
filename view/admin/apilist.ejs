@@ -136,7 +136,7 @@
                 <li class="breadcrumb-item text-muted">
                   <a href="#" class="text-muted">Admin</a>
                 </li>
-                <li class="breadcrumb-item text-dark">Dashboard</li>
+                <li class="breadcrumb-item text-dark">API Data</li>
               </ul>
             </div>
             <div class="d-flex d-lg-none align-items-center ms-n2 me-2">
@@ -204,158 +204,187 @@
                 <div class="card card-xxl-stretch mb-5 mb-xxl-8">
                   <div class="card-header border-0 pt-5">
                     <h3 class="card-title align-items-start flex-column">
-                      <span class="card-label fw-boldest fs-3 text-dark">Welcome <%= username %></span>
-                      <span class="text-gray-400 mt-2 fw-bold fs-6">Admin Dashboard</span>
+                      <span class="card-label fw-boldest fs-3 text-dark">API Database</span>
+                      <span class="text-gray-400 mt-2 fw-bold fs-6">Cek Kembali Data Setelah Perubahan</span>
                     </h3>
                     <div class="card-toolbar">
                       <!--begin::Nav-->
-                      <ul class="nav nav-pills">
-                        <li class="nav-item me-1">
-                          <a class="btn btn-color-black-400" id="JamSekarang"></a>
-                        </li>
-                      </ul>
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newdata">
+                        Tambah Data
+                      </button>
                     </div>
                   </div>
-                  <div class="card-body p-0">
-                    <div class="tab-content pt-10">
-                      <div class="tab-pane fade active show" id="kt_chart_widget_1_tab_pane_1">
-                        <!--begin::Row-->
-                        <div class="row p-0 px-9">
-                          <div class="col">
-                            <!--begin::Stat-->
-                            <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
-                              <span class="fs-4 fw-bold text-gray-400 d-block">Request Hari Ini</span>
-                              <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true">
-                                <%= RequestToday %>
-                              </span>
-                            </div>
-                            <!--end::Stat-->
-                          </div>
-                          <!--end::Col-->
-                          <!--begin::Col-->
-                          <div class="col">
-                            <!--begin::Stat-->
-                            <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
-                              <span class="fs-4 fw-bold text-gray-400 d-block">Limit Apikey</span>
-                              <span class="fs-2x fw-boldest text-gray-800" data-kt-countup="true">
-                                <%= limit %>
-                              </span>
-                            </div>
-                            <!--end::Stat-->
-                          </div>
-                          <!--end::Col-->
-
-                          <!--begin::Col-->
-                          <div class="col">
-                            <!--begin::Stat-->
-                            <div class="border border-dashed border-gray-300 text-center min-w-125px rounded pt-6 pb-4 my-3">
-                              <span class="fs-4 fw-bold text-gray-400 d-block">Apikey</span>
-                              <span class="fs-2x fw-boldest text-gray-800">
-                                <%= apikey %>
-                              </span>
-                            </div>
-                          </div>
-
-                          <div class="py-10">
-                            <div class="py-5">
-                              <span class="text-gray-400 mt-2 fw-bold fs-6">TOTAL PENGUNJUNG</span>
-                              <div class="rounded border p-10" align="center">
-                                <img width="500" alt="Cute count" src="https://count.getloli.com/get/@MrTakt?theme=rule34" />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col">
-                            <div class="py-5">
-                              <span class="text-gray-400 mt-2 fw-bold fs-6">Berbagi Kebaikan</span>
-                              <div class="rounded border p-10">
-                                <a href="https://www.canva.com/brand/join?token=JQA4tcnbexIpsfubkjACUg&referrer=team-invite" class="btn btn-outline btn-outline-dashed btn-outline-info btn-active-light-info me-2 mb-2">Canva
-                                  Invite</a>
-                                <a href="#" class="btn btn-outline btn-outline-dashed btn-outline-success btn-active-light-success me-2 mb-2">Coming
-                                  Soon</a>
-                                <a href="#" class="btn btn-outline btn-outline-dashed btn-outline-danger btn-active-light-danger me-2 mb-2">Coming
-                                  Soon</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                  <!--begin::Row-->
+                  <div class="row p-0 px-9">
+                    <div class="py-10">
+                      <div class="table-responsive">
+                        <table class="table  table-striped border gy-7 gs-7">
+                          <thead>
+                            <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                            </tr>
+                            <th>Nama</th>
+                            <th>Kategori</th>
+                            <th>Premium</th>
+                            <th>Metode</th>
+                            <th>Url</th>
+                            <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% api.forEach(item=> { %>
+                            <tr>
+                              <td>
+                                <%= item.nama %>
+                              </td>
+                              <td>
+                                <%= item.kategori %>
+                              </td>
+                              <td>
+                                <%= item.premium %>
+                              </td>
+                              <td>
+                                <%= item.metode %>
+                              </td>
+                              <td>
+                                <%= item.url %>
+                              </td>
+                              <td>
+                                <button class="btn btn-warning" onclick="openEditModal('<%= item._id %>')" data-bs-toggle="modal">
+                                  Edit Data
+                                </button>
+                                <form action="/apidata/delete/<%= item._id %>" method="POST" style="display:inline;">
+                                  <button type="submit" class="btn btn-danger">Hapus</button>
+                                </form>
+                              </td>
+                            </tr>
+                            <% }) %>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
                 </div>
-                <% if(!verified){ %>
-                <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
-                  <span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                      <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                      <rect fill="#000000" x="11" y="7" width="2" height="8" rx="1" />
-                      <rect fill="#000000" x="11" y="16" width="2" height="2" rx="1" />
-                    </svg>
-                  </span>
-                  <div class="d-flex flex-stack flex-grow-1">
-                    <!--begin::Content-->
-                    <div class="fw-bold">
-                      <h4 class="text-gray-800 fw-bolder">Perhatian!</h4>
-                      <div class="fs-6 text-gray-600">
-                        Email Mu Belum Di Verifikasi
-                        <a class="fw-bolder" href="/send-verification-email">Kirim Ulang Email Verifikasi</a>
+                <div class="modal fade" tabindex="-1" id="logout">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header bg-active-danger text-active-inverse-danger active ">
+                        <h1 class="modal-title ">Keluar</h1>
+                        <!--begin::Close-->
+                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                          <span class="svg-icon svg-icon-2x"></span>
+                        </div>
+                        <!--end::Close-->
                       </div>
-                      <% } %>
-                      <% if( error_messages !="" ){ %>
-                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>
-                          <%= error_messages %>
-                        </strong>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <a class="btn btn-danger" href="/logout">Keluar</a>
                       </div>
-                      <% } %>
-                      <% if( success_messages !="" ){ %>
-                      <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong> Berhasil ! <%= success_messages %></strong>
-                      </div>
-                      <% } %>
                     </div>
                   </div>
-                  <div class="modal fade" tabindex="-1" id="logout">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header bg-active-danger text-active-inverse-danger active ">
-                          <h1 class="modal-title ">Keluar</h1>
-                          <!--begin::Close-->
-                          <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-                            <span class="svg-icon svg-icon-2x"></span>
+                </div>
+                <!--NewData-->
+                <div class="modal fade" tabindex="-1" id="newdata">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Tambah Data</h5>
+                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                          <span class="svg-icon svg-icon-2x"></span>
+                        </div>
+                      </div>
+                      <div class="modal-body">
+                        <form action="/apidata/" method="POST">
+                          <label for="exampleFormControlInput1" class="required form-label">Nama</label>
+                          <input type="text" name="nama" class="form-control form-control-solid required " placeholder="Nama" />
+                          <label for="exampleFormControlInput1" class="required form-label">Kategori</label>
+                          <input type="text" name="kategori" class="form-control form-control-solid" placeholder="Kategori" />
+                          <label for="exampleFormControlInput1" class="required form-label">Jenis Pengguna</label>
+                          <select class="form-select form-select-solid" aria-label=" premium" name="premium" id="premium">
+                            <option value="user">Tidak Premium (User)</option>
+                            <option value="premium">Iya Premium</option>
+                          </select>
+                          <label for="exampleFormControlInput1" class="required form-label">Metode</label>
+                          <select class="form-select form-select-solid" aria-label=" Role" name="metode" id="metode">
+                            <option value="POST">POST Data</option>
+                            <option value="GET">GET Data</option>
+                          </select>
+                          <label for="exampleFormControlInput1" class="required form-label">URL</label>
+                          <input type="text" name="url" class="form-control form-control-solid required " placeholder="URL" />
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                           </div>
-                          <!--end::Close-->
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                          <a class="btn btn-danger" href="/logout">Keluar</a>
-                        </div>
+                        </form>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <!--END NEW DATA-->
+              <!--EDIT DATA-->
+              <div class="modal fade" tabindex="-1" id="editdata">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Edit Data</h5>
+                      <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                        <span class="svg-icon svg-icon-2x"></span>
+                      </div>
+                    </div>
+                    <div class="modal-body">
+                      <form action="/apidata/edit" method="POST">
+                        <input type="hidden" id="_id" name="_id" />
+                        <label for="exampleFormControlInput1" class="form-label">Nama</label>
+                        <input type="text" id="nama" name="nama" class="form-control form-control-solid" placeholder="Nama" />
+                        <label for="exampleFormControlInput1" class="form-label">Kategori</label>
+                        <input type="text" id="kategori" name="kategori" class="form-control form-control-solid " placeholder="Kategori" />
+                        <label for="exampleFormControlInput1" class="form-label">Jenis Pengguna</label>
+                        <select class="form-select form-select-solid" aria-label=" Role" name="premium" id="premium">
+                          <option value="user">Tidak Premium (User)</option>
+                          <option value="premium">Iya Premium</option>
+                        </select>
+                        <label for="exampleFormControlInput1" class="form-label">Metode</label>
+                        <select class="form-select form-select-solid" aria-label=" Role" name="metode" id="metode">
+                          <option value="POST">POST Data</option>
+                          <option value="GET">GET Data</option>
+                        </select>
+                        <label for="exampleFormControlInput1" class="form-label">URL</label>
+                        <input type="text" id="url" name="url" class="form-control form-control-solid  " placeholder="URL" />
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--END EDIT DATA-->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  </div>
   <!--begin::Javascript-->
   <!--begin::Global Javascript Bundle(used by all pages)-->
   <script src="plugins/plugins.bundle.js"></script>
   <script src="js/scripts.bundle.js"></script>
   <script>
-    window.setTimeout("waktu()", 1000);
+    function openEditModal(_id) {
+    $.get(`/apidata/search/${_id}`, function(item) {
+        $('#_id').val(item._id);
+        $('#nama').val(item.nama);
+        $('#kategori').val(item.kategori);
+        $('#premium').val(item.premium);
+        $('#metode').val(item.metode);
+        $('#url').val(item.url);
+        $('#editdata').modal('show');
+    });
+}
 
-    function waktu() {
-      var d = new Date();
-      const jam = d.getHours();
-      const menit = d.getMinutes();
-      const detik = d.getSeconds();
-      setTimeout("waktu()", 1000);
-      document.getElementById("JamSekarang").innerHTML = jam + ":" + menit
-    }
-  </script>
+</script>
   <!--end::Global Javascript Bundle-->
   <!--begin::Page Custom Javascript(used by this page)-->
   <script src="js/widgets.js"></script>
