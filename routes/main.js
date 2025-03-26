@@ -27,7 +27,7 @@ function checkAuth(req, res, next) {
 async function getApikey(id) {
     let limit = await dataweb.findOne();
     let users = await User.findOne({_id: id})
-    return {apikey: users.apikey, username: users.username, checklimit: users.limitApikey, isVerified : users.isVerified, RequestToday: limit.RequestToday , email: users.email};
+    return {apikey: users.apikey, username: users.username, checklimit: users.limitApikey, isVerified : users.isVerified, RequestToday: limit.RequestToday , email: users.email , role : users.role};
 }
 
 
@@ -39,15 +39,15 @@ router.get('/', (req, res) => {
 
 router.get('/dashboard',  checkAuth, async (req, res) => {
   let getinfo =  await getApikey(req.user.id)
-  let { apikey, username, checklimit, isVerified , RequestToday , email } = getinfo
-    res.render("docs", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email });
+  let { apikey, username, checklimit, isVerified , RequestToday , email , role } = getinfo
+    res.render("docs", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email , role: role });
     
 });
 
 router.get('/profile',  checkAuth, async (req, res) => {
   let getinfo =  await getApikey(req.user.id)
-  let { apikey, username, checklimit, isVerified , RequestToday , email } = getinfo
-    res.render("profile", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email });
+  let { apikey, username, checklimit, isVerified , RequestToday , email, role } = getinfo
+    res.render("profile", { username: username, verified: isVerified, apikey: apikey, limit: checklimit , RequestToday: RequestToday , email: email , role: role });
     
 });
 //_______________________ ┏ Router Docs Api ┓ _______________________\\

@@ -26,7 +26,7 @@
             <!--begin::Primary menu-->
             <div id="kt_aside_menu" class="menu menu-column menu-title-gray-600 menu-icon-gray-400 menu-state-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold fs-5" data-kt-menu="true">
               <div class="menu-item py-2">
-                <a class="menu-link active menu-center" href="/admin" title="Dashboard" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                <a class="menu-link active menu-center" href="/dashboard" title="Dashboard" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
                   <span class="menu-icon me-0">
                     <!--begin::Svg Icon | path: icons/duotone/Home/Home2.svg-->
                     <span class="svg-icon svg-icon-1">
@@ -38,45 +38,49 @@
                   </span>
                 </a>
               </div>
-              <div data-kt-menu-trigger="click" data-kt-menu-placement="right-start" data-kt-menu-flip="bottom" class="menu-item py-2">
-                <span class="menu-link menu-center" title="Database" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-                  <span class="menu-icon me-0">
-                    <!--begin::Svg Icon | path: icons/duotone/Shopping/Chart.svg-->
-                    <span class="svg-icon svg-icon-1">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-database-fill" viewBox="0 0 16 16">
-                        <path d="M3.904 1.777C4.978 1.289 6.427 1 8 1s3.022.289 4.096.777C13.125 2.245 14 2.993 14 4s-.875 1.755-1.904 2.223C11.022 6.711 9.573 7 8 7s-3.022-.289-4.096-.777C2.875 5.755 2 5.007 2 4s.875-1.755 1.904-2.223" />
-                        <path d="M2 6.161V7c0 1.007.875 1.755 1.904 2.223C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777C13.125 8.755 14 8.007 14 7v-.839c-.457.432-1.004.751-1.49.972C11.278 7.693 9.682 8 8 8s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
-                        <path d="M2 9.161V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13s3.022-.289 4.096-.777C13.125 11.755 14 11.007 14 10v-.839c-.457.432-1.004.751-1.49.972-1.232.56-2.828.867-4.51.867s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
-                        <path d="M2 12.161V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13v-.839c-.457.432-1.004.751-1.49.972-1.232.56-2.828.867-4.51.867s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
-                      </svg>
+              <% if (role === 'admin') { %>
+                <div data-kt-menu-trigger="click" data-kt-menu-placement="right-start" data-kt-menu-flip="bottom" class="menu-item py-2">
+                  <span class="menu-link menu-center" title="Database" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+                    <span class="menu-icon me-0">
+                      <!--begin::Svg Icon | path: icons/duotone/Shopping/Chart.svg-->
+                      <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-database-fill" viewBox="0 0 16 16">
+                          <path d="M3.904 1.777C4.978 1.289 6.427 1 8 1s3.022.289 4.096.777C13.125 2.245 14 2.993 14 4s-.875 1.755-1.904 2.223C11.022 6.711 9.573 7 8 7s-3.022-.289-4.096-.777C2.875 5.755 2 5.007 2 4s.875-1.755 1.904-2.223" />
+                          <path d="M2 6.161V7c0 1.007.875 1.755 1.904 2.223C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777C13.125 8.755 14 8.007 14 7v-.839c-.457.432-1.004.751-1.49.972C11.278 7.693 9.682 8 8 8s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
+                          <path d="M2 9.161V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13s3.022-.289 4.096-.777C13.125 11.755 14 11.007 14 10v-.839c-.457.432-1.004.751-1.49.972-1.232.56-2.828.867-4.51.867s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
+                          <path d="M2 12.161V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13v-.839c-.457.432-1.004.751-1.49.972-1.232.56-2.828.867-4.51.867s-3.278-.307-4.51-.867c-.486-.22-1.033-.54-1.49-.972" />
+                        </svg>
+                      </span>
+                      <!--end::Svg Icon-->
                     </span>
-                    <!--end::Svg Icon-->
                   </span>
-                </span>
-                <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
-                  <div class="menu-item">
-                    <div class="menu-content">
-                      <span class="menu-section fs-5 fw-bolder ps-1 py-1">Database</span>
+                  <div class="menu-sub menu-sub-dropdown w-225px px-1 py-4">
+                    <div class="menu-item">
+                      <div class="menu-content">
+                        <span class="menu-section fs-5 fw-bolder ps-1 py-1">Database</span>
+                      </div>
+                    </div>
+                    <div class="menu-item">
+                      <a class="menu-link" href="/userdata">
+                        <span class="menu-bullet">
+                          <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">User Data</span>
+                      </a>
+                    </div>
+                    <div class="menu-item">
+                      <a class="menu-link" href="/apidata">
+                        <span class="menu-bullet">
+                          <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">API Data
+                      </a>
                     </div>
                   </div>
-                  <div class="menu-item">
-                    <a class="menu-link" href="/userdata">
-                      <span class="menu-bullet">
-                        <span class="bullet bullet-dot"></span>
-                      </span>
-                      <span class="menu-title">User Data</span>
-                    </a>
-                  </div>
-                  <div class="menu-item">
-                    <a class="menu-link" href="/apidata">
-                      <span class="menu-bullet">
-                        <span class="bullet bullet-dot"></span>
-                      </span>
-                      <span class="menu-title">API Data
-                    </a>
-                  </div>
                 </div>
-              </div>
+                <% }else{ %>
+              <br>
+              <% } %>
             </div>
             <!--end::Primary menu-->
           </div>
@@ -186,6 +190,13 @@
                     </div>
                   </div>
                   <div class="separator my-2"></div>
+                  <% if (role === 'admin') { %>
+                  <div class="menu-item px-5">
+                    <a href="/admin" class="menu-link px-5">Admin</a>
+                  </div>
+                  <% }else{ %>
+                    <br>
+                  <% } %>
                   <div class="menu-item px-5">
                     <a href="/profile" class="menu-link px-5">Profile</a>
                   </div>
@@ -321,6 +332,20 @@
                     </div>
                   </div>
                 </div>
+                <!--NewData-->
+                <div class="modal fade" tabindex="-1" id="newdata">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Tambah Data</h5>
+                        <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                          <span class="svg-icon svg-icon-2x"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--End Newdata-->
                 <!--begin::details View-->
                 <div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
                   <!--begin::Card header-->
@@ -331,7 +356,7 @@
                     </div>
                     <!--end::Card title-->
                     <!--begin::Action-->
-                    <a href="#" class="btn btn-primary align-self-center">Edit Profile</a>
+                    <a href="#" class="btn btn-primary align-self-center">Coming SOON</a>
                     <!--end::Action-->
                   </div>
                   <!--begin::Card header-->
@@ -353,7 +378,7 @@
                     <div class="row mb-7">
                       <!--begin::Label-->
                       <label class="col-lg-4 fw-bold text-muted">Email
-                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i></label>
+                        <i class="bi bi-envelope-at-fill" data-bs-toggle="tooltip" title="Phone number must be active"></i></label>
                       <!--end::Label-->
                       <!--begin::Col-->
                       <div class="col-lg-8 d-flex align-items-center">
@@ -421,7 +446,6 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
   <!--begin::Javascript-->
   <!--begin::Global Javascript Bundle(used by all pages)-->

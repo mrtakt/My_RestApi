@@ -257,6 +257,13 @@
                     </div>
                   </div>
                   <div class="separator my-2"></div>
+                  <% if (role === 'admin') { %>
+                    <div class="menu-item px-5">
+                      <a href="/admin" class="menu-link px-5">Admin</a>
+                    </div>
+                    <% }else{ %>
+                      <br>
+                    <% } %>
                   <div class="menu-item px-5">
                     <a href="/profile" class="menu-link px-5">Profile</a>
                   </div>
