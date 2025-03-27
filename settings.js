@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 //_______________________ ┏  Main Setting  ┓ _______________________\\
 
 creator = "Yukkkiii";
