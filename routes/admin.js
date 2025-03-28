@@ -273,8 +273,8 @@ router.get("/apidata/search/:_id", checkRole("admin"), checkRole("admin"), async
 //_______________________ ┏ Perbaikan Oleh Gemini ┓ _______________________\\
 router.get("/data", checkRole("admin"), async (req, res) => {
   try {
-    const apiData = await listApi.find(); // Gunakan .lean() untuk mendapatkan objek JS biasa
-    const userData = await User.find();
+    const apiData = await listApi.find().lean(); // Gunakan .lean() untuk mendapatkan objek JS biasa
+    const userData = await User.find().lean();
 
     // Tambahkan properti 'type' untuk membedakan jenis data
     const combinedData = [

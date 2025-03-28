@@ -52,7 +52,7 @@
     const dataTable = document.getElementById('dataTable');
     const dataTableHead = dataTable.querySelector('thead tr');
     const dataTableBody = dataTable.querySelector('tbody');
-    let allData = `<%- JSON.stringify(data) %>`;
+    let allData = <%- JSON.stringify(data) %>;
 
     function displayData(type) {
       const filteredData = allData.filter(item => item.type === type);
