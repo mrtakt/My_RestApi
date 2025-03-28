@@ -1,0 +1,125 @@
+<html lang="en">
+<head>
+  <!-- ... head ... -->
+  <title>Admin Data</title>
+  <!-- ... css ... -->
+</head>
+<body id="kt_body" class="header-fixed ...">
+  <!-- ... layout ... -->
+  <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="container" id="kt_content_container">
+      <% if (messages.success) { %>
+        <div class="alert alert-success"><%= messages.success %></div>
+      <% } %>
+      <% if (messages.error) { %>
+        <div class="alert alert-danger"><%= messages.error %></div>
+      <% } %>
+
+      <div class="card card-xxl-stretch mb-5 mb-xxl-8">
+        <div class="card-header border-0 pt-5">
+          <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-boldest fs-3 text-dark">Data</span>
+            <span class="text-gray-400 mt-2 fw-bold fs-6">Pilih jenis data yang akan ditampilkan</span>
+          </h3>
+          <div class="card-toolbar">
+            <select id="dataType" class="form-select">
+              <option value="api">API Data</option>
+              <option value="user">User Data</option>
+            </select>
+          </div>
+        </div>
+        <div class="card-body py-3">
+          <div class="table-responsive">
+            <table class="table table-striped border gy-7 gs-7" id="dataTable">
+              <thead>
+                <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                  <!-- Header akan diisi oleh JavaScript -->
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Data akan diisi oleh JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ... footer dan script ... -->
+
+  <script>
+    const dataTypeSelect = document.getElementById('dataType');
+    const dataTable = document.getElementById('dataTable');
+    const dataTableHead = dataTable.querySelector('thead tr');
+    const dataTableBody = dataTable.querySelector('tbody');
+    let allData = "<%- JSON.stringify(data) %>";
+
+    function displayData(type) {
+      const filteredData = allData.filter(item => item.type === type);
+      dataTableHead.innerHTML = '';
+      dataTableBody.innerHTML = '';
+
+      if (type === 'api') {
+        dataTableHead.innerHTML = `
+          <th>Nama</th>
+          <th>Kategori</th>
+          <th>Premium</th>
+          <th>Metode</th>
+          <th>URL</th>
+          <th>Aksi</th>
+        `;
+        filteredData.forEach(item => {
+          const row = dataTableBody.insertRow();
+          row.innerHTML = `
+            <td>${item.nama}</td>
+            <td>${item.kategori}</td>
+            <td>${item.premium}</td>
+            <td>${item.metode}</td>
+            <td>${item.url}</td>
+            <td>
+              <button class="btn btn-warning" onclick="openEditModal('${item._id}', 'api')" data-bs-toggle="modal">Edit</button>
+              <form action="/apidata/delete/${item._id}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger">Hapus</button>
+              </form>
+            </td>
+          `;
+        });
+      } else if (type === 'user') {
+        dataTableHead.innerHTML = `
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Limit</th>
+          <th>Aksi</th>
+        `;
+        filteredData.forEach(item => {
+          const row = dataTableBody.insertRow();
+          row.innerHTML = `
+            <td>${item.username}</td>
+            <td>${item.email}</td>
+            <td>${item.role}</td>
+            <td>${item.limitApikey}</td>
+            <td>
+              <button class="btn btn-warning" onclick="openEditModal('${item._id}', 'user')" data-bs-toggle="modal">Edit</button>
+              <form action="/userdata/delete/${item._id}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger">Hapus</button>
+              </form>
+            </td>
+          `;
+        });
+      }
+    }
+
+    dataTypeSelect.addEventListener('change', (event) => {
+      displayData(event.target.value);
+    });
+
+    displayData(dataTypeSelect.value);
+
+    function openEditModal(id, type) {
+      // Logika modal edit akan ditambahkan nanti
+      console.log(`Open edit modal for ${type} with id ${id}`);
+    }
+  </script>
+</body>
+</html>
