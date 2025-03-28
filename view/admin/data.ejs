@@ -26,6 +26,7 @@
               <option value="api">API Data</option>
               <option value="user">User Data</option>
             </select>
+            <input type="text" id="searchInput" class="form-control ms-3" placeholder="Cari...">
           </div>
         </div>
         <div class="card-body py-3">
@@ -120,6 +121,36 @@
       // Logika modal edit akan ditambahkan nanti
       console.log(`Open edit modal for ${type} with id ${id}`);
     }
+    const searchInput = document.getElementById('searchInput');
+
+  function displayData(type) {
+    let filteredData = allData.filter(item => item.type === type);
+
+    const searchTerm = searchInput.value.toLowerCase();
+    if (searchTerm) {
+      filteredData = filteredData.filter(item => {
+        if (type === 'api') {
+          return (
+            item.nama.toLowerCase().includes(searchTerm) ||
+            item.kategori.toLowerCase().includes(searchTerm) ||
+            item.url.toLowerCase().includes(searchTerm)
+          );
+        } else if (type === 'user') {
+          return (
+            item.username.toLowerCase().includes(searchTerm) ||
+            item.email.toLowerCase().includes(searchTerm) ||
+            item.role.toLowerCase().includes(searchTerm)
+          );
+        }
+        return false;
+      });
+    }
+    // ... sisa fungsi displayData ...
+  }
+
+  searchInput.addEventListener('input', () => {
+    displayData(dataTypeSelect.value);
+  });
   </script>
 </body>
 </html>
