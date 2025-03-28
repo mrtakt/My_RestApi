@@ -73,7 +73,7 @@
                         <span class="bullet bullet-dot"></span>
                       </span>
                       <span class="menu-title">API Data
-                    </a>
+                      </span>
                   </div>
                 </div>
               </div>
@@ -105,7 +105,7 @@
                   <div class="menu-content fs-6 text-dark fw-bolder px-3 py-4">
                     Social
                   </div>
-                </div>
+                </div>      
                 <div class="separator mb-3 opacity-75"></div>
                 <div class="menu-item px-3">
                   <a href="https://github.com/mrtakt" class="menu-link px-3" target="_blank">Github</a>
@@ -136,7 +136,7 @@
                 <li class="breadcrumb-item text-muted">
                   <a href="#" class="text-muted">Admin</a>
                 </li>
-                <li class="breadcrumb-item text-dark">User Data</li>
+                <li class="breadcrumb-item text-dark">Database</li>
               </ul>
             </div>
             <div class="d-flex d-lg-none align-items-center ms-n2 me-2">
@@ -180,11 +180,11 @@
                           <%= username %>
                           <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"></span>
                         </div>
-                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7">
+                        <a href="mailto:<%= email %>" class="fw-bold text-muted text-hover-primary fs-7">
                           <%= email %>
                         </a>
                       </div>
-                    </div>
+                    </div>        
                   </div>
                   <div class="separator my-2"></div>
                   <div class="menu-item px-5">
@@ -197,7 +197,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>      
+        </div>
+        <!-- Menu Utama Selesai -->
         </div>
         <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
           <div class="container" id="kt_content_container">
@@ -291,6 +293,7 @@
                                 </form>
                               </td>
                             </tr>
+                           
                             <% }) %>
                           </tbody>
                         </table>
@@ -394,10 +397,97 @@
                   </div>
                 </div>
                 <!--End Newdata-->
+                 <!--Start APi Data-->
+                <div class="card card-xxl-stretch mb-5 mb-xxl-8">
+                  <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                      <span class="card-label fw-boldest fs-3 text-dark">Api Database</span>
+                      <span class="text-gray-400 mt-2 fw-bold fs-6">Cek Kembali Data Setelah Perubahan</span>
+                    </h3>
+                    <div style="margin: 0 auto" class="col-12 col-md-6 col-lg-5 p-5 customborder">
+                      <% if( error !="" ){ %>
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong> Error </strong>
+                        <%= error %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                      <% } %> <% if( error_messages !="" ){ %>
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong> Error </strong>
+                        <%= error_messages %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                      <% } %> <% if( success_messages !="" ){ %>
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Berhasil</strong>
+                        <%= success_messages %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                      <% } %>
+                    </div>
+                    <div class="card-toolbar">
+                      <!--begin::Nav-->
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newdata">
+                        Tambah Data
+                      </button>
+                    </div>
+                  </div>
+                  <!-- ==========================-->
+                  <div class="row p-0 px-9">
+                    <div class="py-10">
+                      <div class="table-responsive">
+                        <table class="table  table-striped border gy-7 gs-7">
+                          <thead>
+                            <tr class="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                            </tr>
+                            <th>Nama</th>
+                            <th>Kategori</th>
+                            <th>Premium</th>
+                            <th>Metode</th>
+                            <th>Url</th>
+                            <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% api.forEach(item=> { %>
+                            <tr>
+                              <td>
+                                <%= item.nama %>
+                              </td>
+                              <td>
+                                <%= item.kategori %>
+                              </td>
+                              <td>
+                                <%= item.premium %>
+                              </td>
+                              <td>
+                                <%= item.metode %>
+                              </td>
+                              <td>
+                                <%= item.url %>
+                              </td>
+                              <td>
+                                <button class="btn btn-warning" onclick="openEditModal('<%= item._id %>')" data-bs-toggle="modal">
+                                  Edit Data
+                                </button>
+                                <form action="/apidata/delete/<%= item._id %>" method="get" style="display:inline;">
+                                  <button type="submit" class="btn btn-danger">Hapus</button>
+                                </form>
+                              </td>
+                            </tr>
+                           
+                            <% }) %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--End Api Data-->
               </div>
             </div>
-          </div>
-        </div>
+          </div>      
+        </div>      
       </div>
     </div>
   </div>
