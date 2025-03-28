@@ -302,40 +302,6 @@ router.get("/data", checkRole("admin"), async (req, res) => {
     res.redirect("/admin"); // Atau rute lain yang sesuai
   }
 });
-
-router.get("/data", checkRole("admin"), async (req, res) => {
-  try {
-    let apiData = [];
-    let userData = [];
-
-    const searchTerm = req.query.search ? req.query.search.toLowerCase() : "";
-
-    if (searchTerm) {
-      apiData = await listApi.find({
-        $or: [
-          { nama: { $regex: searchTerm, $options: "i" } },
-          { kategori: { $regex: searchTerm, $options: "i" } },
-          { url: { $regex: searchTerm, $options: "i" } },
-        ],
-      }).lean();
-
-      userData = await User.find({
-        $or: [
-          { username: { $regex: searchTerm, $options: "i" } },
-          { email: { $regex: searchTerm, $options: "i" } },
-          { role: { $regex: searchTerm, $options: "i" } },
-        ],
-      }).lean();
-    } else {
-      apiData = await listApi.find().lean();
-      userData = await User.find().lean();
-    }
-
-    // ... (sisa kode untuk menggabungkan data dan merender tampilan) ...
-  } catch (error) {
-    // ... penanganan kesalahan ...
-  }
-});
 //-----------------------------------------------------
 
 module.exports = router;
