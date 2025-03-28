@@ -1,7 +1,7 @@
 //_______________________ ┏  Main Setting  ┓ _______________________\\
 
 creator = "Yukkkiii";
-port = 3002; //port host
+port = 4001; //port host default 3002
 LimitApikey = 2000;
 role = "user" //default user
 dbname = "new"
